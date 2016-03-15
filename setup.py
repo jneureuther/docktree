@@ -1,13 +1,17 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+"""
+Setup script
+"""
 
 from setuptools import setup
 
 with open('README.rst') as f:
-    readme_file = f.read()
+    README_FILE = f.read()
 
 with open('LICENSE') as f:
-    license_file = f.read()
+    LICENSE_FILE = f.read()
 
 setup(
     name='docktree',
@@ -24,11 +28,11 @@ setup(
         'Topic :: Utilities'
     ],
     description='analyse dependencies of docker images',
-    long_description=readme_file,
+    long_description=README_FILE,
     url='https://github.com/jneureuther/docktree',
     author='Julian Neureuther',
     author_email='dev@jneureuther.de',
-    license=license_file,
+    license=LICENSE_FILE,
     packages=['docktree'],
     entry_points={
         'console_scripts': [

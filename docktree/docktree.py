@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # PYTHON_ARGCOMPLETE_OK
 
@@ -7,7 +7,8 @@ Analyse dependencies of docker images.
 """
 
 from __future__ import print_function
-from docktree.ImageLayer import *
+from __future__ import absolute_import
+from .ImageLayer import ImageLayer
 
 import docker
 import sys
@@ -15,7 +16,6 @@ import argparse
 try:
     import argcomplete
 except ImportError:
-    print("argcomplete not available")
     pass
 
 
@@ -38,7 +38,7 @@ def analyse_layers():
         )
         layers[image['Id']] = layer
 
-    for layer_id, layer in layers.items():
+    for layer in layers.values():
         if layer.parent_identifier != '':
             layers[layer.parent_identifier].children.append(layer)
             layer.parent = layers[layer.parent_identifier]
@@ -63,7 +63,7 @@ def get_heads(layers):
     :rtype: list
     """
     heads = []
-    for layer_id, layer in layers.items():
+    for layer in layers.values():
         if layer.parent_identifier == '':
             heads.append(layer)
     return heads
