@@ -34,7 +34,7 @@ class ImageLayer(object):
         elif len(self.parent.children) >= 1:
             print(indentation, '|-', self)
         for child in self._children:
-            child.print_children(indentation + "  ")
+            child.print_children(indentation + '  ')
 
     @property
     def children(self):
