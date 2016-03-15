@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 class ImageLayer(object):
     def __init__(self, children=None, parent=None, identifier='', parent_identifier='', tags=None):
         """
