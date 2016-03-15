@@ -3,8 +3,9 @@
 
 class ImageLayer(object):
     """
-    A Docker layer for object orientated algorythms
+    abstraction of a docker image layer
     """
+
     def __init__(self, children=None, parent=None, identifier='', parent_identifier='', tags=None):
         """
         create and initialize a new ImageLayer object
