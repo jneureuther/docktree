@@ -1,6 +1,10 @@
 docktree
 ========
 
+.. image:: https://landscape.io/github/jneureuther/docktree/develop/landscape.svg?style=flat
+   :target: https://landscape.io/github/jneureuther/docktree/develop
+   :alt: Code Health
+
 Analyse dependencies of docker images.
 
 .. code::
