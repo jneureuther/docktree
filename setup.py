@@ -24,7 +24,8 @@ setup(
         'License :: Other/Proprietary License',
         'Natural Language :: English',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
         'Topic :: Utilities'
     ],
     description='analyse dependencies of docker images',
