@@ -22,7 +22,9 @@ command-line
 
 .. code:: bash
 
-  usage: docktree [-h] [-i]
+  usage: docktree-cli [-h] [-i]
+
+  cli for docktree module
 
   optional arguments:
     -h, --help          show this help message and exit
