@@ -36,7 +36,7 @@ setup(
     author_email='dev@jneureuther.de',
     license=LICENSE_FILE,
     packages=['docktree'],
-    scripts=['bin/docktree'],
+    scripts=['bin/docktree-cli'],
     install_requires=[
         'argparse',
         'argcomplete>=1.1.0',
