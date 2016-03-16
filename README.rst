@@ -50,7 +50,7 @@ Contributing
 .. code:: bash
 
   vagrant rsync
-  sudo bash -c "cd /vagrant/ && ./setup.py develop && cd -"
+  sudo bash -c "cd /vagrant/ && python3 setup.py develop && cd -"
 
 .. _Vagrant: https://www.vagrantup.com/
 
