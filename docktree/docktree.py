@@ -33,15 +33,14 @@ def analyse_layers():
     for image in images:
         layer = ImageLayer(
             identifier=image['Id'],
-            parent_identifier=image['ParentId'],
             tags=image['RepoTags']
         )
         layers[image['Id']] = layer
 
-    for layer in layers.values():
-        if layer.parent_identifier != '':
-            layers[layer.parent_identifier].children.append(layer)
-            layer.parent = layers[layer.parent_identifier]
+    for image in images:
+        if image['ParentId'] != '':
+            layers[image['ParentId']].children.append(layers[image['Id']])
+            layers[image['Id']].parent = layers[image['ParentId']]
 
     return layers
 
@@ -64,7 +63,7 @@ def get_heads(layers):
     """
     heads = []
     for layer in layers.values():
-        if layer.parent_identifier == '':
+        if layer.parent is None:
             heads.append(layer)
     return heads
 
@@ -87,12 +86,10 @@ def remove_untagged_layers(layers):
                     layer.parent.children.append(child)
             else:
                 for child in layer.children:
-                    child.parent_identifier = ''
                     child.parent = None
             if layer.children is not None:
                 for child in layer.children:
                     child.parent = layer.parent
-                    child.parent_identifier = layer.parent_identifier
 
     for tag in empty_tags:
         layers.pop(tag)
