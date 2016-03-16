@@ -1,17 +1,22 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+"""
+Setup script
+"""
 
 from setuptools import setup
 
 with open('README.rst') as f:
-    readme_file = f.read()
+    README_FILE = f.read()
 
 with open('LICENSE') as f:
-    license_file = f.read()
+    LICENSE_FILE = f.read()
 
 setup(
     name='docktree',
     version='0.1',
+    # see https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         'Development Status :: 1 - Planning',
         'Environment :: Console',
@@ -20,21 +25,18 @@ setup(
         'License :: Other/Proprietary License',
         'Natural Language :: English',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
         'Topic :: Utilities'
     ],
     description='analyse dependencies of docker images',
-    long_description=readme_file,
+    long_description=README_FILE,
     url='https://github.com/jneureuther/docktree',
     author='Julian Neureuther',
     author_email='dev@jneureuther.de',
-    license=license_file,
+    license=LICENSE_FILE,
     packages=['docktree'],
-    entry_points={
-        'console_scripts': [
-            'docktree=docktree.docktree:main'
-        ]
-    },
+    scripts=['bin/docktree-cli'],
     install_requires=[
         'argparse',
         'argcomplete>=1.1.0',

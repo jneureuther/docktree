@@ -2,20 +2,22 @@
 
 
 class ImageLayer(object):
-    def __init__(self, children=None, parent=None, identifier='', parent_identifier='', tags=None):
+    """
+    abstraction of a docker image layer
+    """
+
+    def __init__(self, children=None, parent=None, identifier='', tags=None):
         """
         create and initialize a new ImageLayer object
         :param children: list of children as ImageLayer objects
         :param parent: parent as ImageLayer object
         :param identifier: unique string
-        :param parent_identifier: unique identifier of parent layer
         :param tags: list of tags in unicode
         """
 
         self._children = children if children is not None else []
         self._parent = parent
         self._identifier = identifier
-        self._parent_identifier = parent_identifier
         self._tags = tags if tags is not None else []
 
     def __repr__(self):
@@ -29,7 +31,7 @@ class ImageLayer(object):
         print a tree following the double-linked list
         :param indentation: indentation for the current layer
         """
-        if self._parent_identifier == '':
+        if self.parent is None:
             print('-', self)
         elif len(self.parent.children) >= 1:
             print(indentation, '|-', self)
@@ -113,30 +115,6 @@ class ImageLayer(object):
         delete the identifier
         """
         del self._identifier
-
-    @property
-    def parent_identifier(self):
-        """
-        get the identifier of the parent layer
-        :return: identifier of the parent layer
-        :rtype: str
-        """
-        return self._parent_identifier
-
-    @parent_identifier.setter
-    def parent_identifier(self, parent_identifier):
-        """
-        set the identifier of the parent layer
-        :param parent_identifier: identifier of the parent layer
-        """
-        self._parent_identifier = parent_identifier
-
-    @parent_identifier.deleter
-    def parent_identifier(self):
-        """
-        delete the identifier of the parent layer
-        """
-        del self._parent_identifier
 
     @property
     def tags(self):

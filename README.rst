@@ -22,7 +22,9 @@ command-line
 
 .. code:: bash
 
-  usage: docktree [-h] [-i]
+  usage: docktree-cli [-h] [-i]
+
+  cli for docktree module
 
   optional arguments:
     -h, --help          show this help message and exit
@@ -48,7 +50,7 @@ Contributing
 .. code:: bash
 
   vagrant rsync
-  sudo bash -c "cd /vagrant/ && ./setup.py develop && cd -"
+  sudo bash -c "cd /vagrant/ && python3 setup.py develop && cd -"
 
 .. _Vagrant: https://www.vagrantup.com/
 
