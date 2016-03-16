@@ -37,15 +37,6 @@ def analyse_layers():
     return layers
 
 
-def print_tree(heads):
-    """
-    print a tree starting at heads to stdout
-    :param heads: heads of the tree
-    """
-    for head in heads:
-        head.print_children()
-
-
 def get_heads(layers):
     """
     return heads of a given tree

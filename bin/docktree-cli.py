@@ -15,6 +15,15 @@ except ImportError:
     pass
 
 
+def print_tree(heads):
+    """
+    print a tree starting at heads to stdout
+    :param heads: heads of the tree
+    """
+    for head in heads:
+        head.print_children()
+
+
 def parse_args(argv=sys.argv[1:]):
     """
     :param argv: arguments which we get called with
@@ -49,7 +58,7 @@ def main():
     if not args.print_intermediate:
         layers = docktree.remove_untagged_layers(layers)
     heads = docktree.get_heads(layers)
-    docktree.print_tree(heads)
+    print_tree(heads)
 
 if __name__ == '__main__':
     main()
