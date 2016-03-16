@@ -36,11 +36,7 @@ setup(
     author_email='dev@jneureuther.de',
     license=LICENSE_FILE,
     packages=['docktree'],
-    entry_points={
-        'console_scripts': [
-            'docktree=docktree.docktree:main'
-        ]
-    },
+    scripts=['bin/docktree'],
     install_requires=[
         'argparse',
         'argcomplete>=1.1.0',
