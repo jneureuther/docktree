@@ -155,14 +155,6 @@ class ImageLayer(object):
         """
         return self._size
 
-    @size.setter
-    def size(self, size):
-        """
-        set the size of the layer in bytes
-        :param size: size of the layer in bytes
-        """
-        self._size = size
-
     @size.deleter
     def size(self):
         """
