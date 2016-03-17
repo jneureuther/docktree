@@ -9,10 +9,10 @@ Analyse dependencies of docker images.
 
 .. code::
 
-  - 65e4158d9625 Tags: ['docker.io/busybox:latest']
-     |- d4b4a1f6de61 Tags: ['bar:latest']
-       |- 29f89a1915a8 Tags: ['baz:latest']
-     |- ab8665c3e355 Tags: ['foo:latest']
+  - 65e4158d9625 Tags: ['docker.io/busybox:latest'] Size: 1.1 MiB
+     |- 8fa48410182e Tags: ['bar:latest'] Size: 1.1 MiB
+       |- 26cc8a5feb49 Tags: ['baz:latest'] Size: 1.1 MiB
+     |- 05710237af2f Tags: ['foo:latest'] Size: 1.1 MiB
 
 Usage
 -----
