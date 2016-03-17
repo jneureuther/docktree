@@ -6,18 +6,18 @@ class ImageLayer(object):
     abstraction of a docker image layer
     """
 
-    def __init__(self, children=None, parent=None, identifier='', tags=None):
+    def __init__(self, identifier, children=None, parent=None, tags=None):
         """
         create and initialize a new ImageLayer object
+        :param identifier: unique string
         :param children: list of children as ImageLayer objects
         :param parent: parent as ImageLayer object
-        :param identifier: unique string
         :param tags: list of tags in unicode
         """
 
+        self._identifier = identifier
         self._children = children if children is not None else []
         self._parent = parent
-        self._identifier = identifier
         self._tags = tags if tags is not None else []
 
     def __repr__(self):
