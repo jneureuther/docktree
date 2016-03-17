@@ -24,7 +24,7 @@ class ImageLayer(object):
         """
         :return: string containing a printable representation of a ImageLayer object
         """
-        return self._identifier[:12] + ' Tags: ' + str(self._tags)
+        return '{0} Tags: {1}'.format(self._identifier[:12], str(self._tags))
 
     def print_children(self, indentation=''):
         """

@@ -44,11 +44,7 @@ def get_heads(layers):
     :return: heads of the tree
     :rtype: list
     """
-    heads = []
-    for layer in layers.values():
-        if layer.parent is None:
-            heads.append(layer)
-    return heads
+    return [layer for layer in layers.values() if layer.parent is None]
 
 
 def remove_untagged_layers(layers):
