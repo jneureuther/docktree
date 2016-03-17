@@ -25,7 +25,8 @@ def analyse_layers():
     for image in images:
         layer = ImageLayer(
             identifier=image['Id'],
-            tags=image['RepoTags']
+            tags=image['RepoTags'],
+            size=image['VirtualSize']
         )
         layers[image['Id']] = layer
 
