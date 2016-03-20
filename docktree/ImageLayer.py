@@ -30,13 +30,17 @@ class ImageLayer(object):
         """
         print a tree following the double-linked list
         :param indentation: indentation for the current layer
+        :return: the ascii output
+        :rtype: str
         """
+        output = ''
         if self.parent is None:
-            print('-', self)
+            output += '- {lay}\n'.format(lay=self)
         elif len(self.parent.children) >= 1:
-            print(indentation, '|-', self)
+            output += '{ind}|- {lay}\n'.format(ind=indentation, lay=self)
         for child in self._children:
-            child.print_tree(indentation + '  ')
+            output += child.print_tree(indentation + '  ')
+        return output
 
     @property
     def children(self):
