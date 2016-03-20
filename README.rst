@@ -54,6 +54,17 @@ Contributing
 
 .. _Vagrant: https://www.vagrantup.com/
 
+unittests
+~~~~~~~~~
+
+Provide unittests_ whenever you can. Run them by executing:
+
+.. _unittests: test/
+
+.. code:: bash
+
+  ./setup.py test
+
 License
 -------
 
