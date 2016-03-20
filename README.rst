@@ -59,7 +59,7 @@ unittests
 
 Provide unittests_ whenever you can. Run them by executing:
 
-.. _unittests: test/
+.. _unittests: tests/
 
 .. code:: bash
 
