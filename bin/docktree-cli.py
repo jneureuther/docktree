@@ -61,6 +61,7 @@ def parse_args(argv=sys.argv[1:]):
         help='print intermediate (untagged) layers'
     )
     parser.add_argument(
+        '-f',
         '--format',
         dest='output_format',
         choices=('ascii', 'json'),
