@@ -161,18 +161,18 @@ class ImageLayer(object):
 
 def _convert_size(size):
     """
-    converts size of image to a appropriate printable format
+    converts size of image to a human readable format (base is 1024)
     :param size: size of a image in bytes
-    :return: size of a image in appropriate printable format
+    :return: size of a image in human readable format
     :rtype: str
     """
-    if size <= 1024:
-        return str(size) + ' B'
-    elif size <= 1024*1024:
-        return str(round(size/1024, 1)) + ' kiB'
-    elif size <= 1024*1024*1024:
-        return str(round(size/1024/1024, 1)) + ' MiB'
-    elif size <= 1024*1024*1024*1024:
-        return str(round(size/1024/1024/1024, 1)) + ' GiB'
+    if size >= 1024*1024*1024*1024:
+        return '{0:.1f} TiB'.format(size/1024/1024/1024/1024)
+    elif size >= 1024*1024*1024:
+        return '{0:.1f} GiB'.format(size/1024/1024/1024)
+    elif size >= 1024*1024:
+        return '{0:.1f} MiB'.format(size/1024/1024)
+    elif size >= 1024:
+        return '{0:.1f} KiB'.format(size/1024)
     else:
-        return str(size) + ' B'
+        return '{0} B'.format(size)
