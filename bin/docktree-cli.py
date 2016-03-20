@@ -26,7 +26,7 @@ class ImageLayerEncoder(json.JSONEncoder):
                 'id': obj.identifier,
                 'children': obj.children,
                 'tags': obj.tags,
-                # 'size': obj.size,
+                'size': obj.size,
             }
         return json.JSONEncoder.default(self, obj)
 
