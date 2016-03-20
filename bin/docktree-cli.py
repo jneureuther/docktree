@@ -38,7 +38,7 @@ def print_tree(heads, output_format='ascii'):
     """
     if output_format == 'ascii':
         for head in heads:
-            head.print_tree()
+            print(head.print_tree())
     else:
         print(json.dumps(heads, cls=ImageLayerEncoder))
 
