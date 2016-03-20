@@ -32,7 +32,7 @@ class ImageLayer(object):
             layer_size=_convert_size(self.size),
         )
 
-    def print_children(self, indentation=''):
+    def print_tree(self, indentation=''):
         """
         print a tree following the double-linked list
         :param indentation: indentation for the current layer
@@ -45,7 +45,7 @@ class ImageLayer(object):
         elif len(self.parent.children) >= 1:
             output += '{ind}|- {lay}\n'.format(ind=indentation, lay=self)
         for child in self._children:
-            output += child.print_children(indentation + '  ')
+            output += child.print_tree(indentation + '  ')
         return output
 
     @property

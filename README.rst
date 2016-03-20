@@ -22,13 +22,15 @@ command-line
 
 .. code:: bash
 
-  usage: docktree-cli [-h] [-i]
+  usage: docktree-cli [-h] [-i] [--format {ascii,json}]
 
   cli for docktree module
 
   optional arguments:
-    -h, --help          show this help message and exit
-    -i, --intermediate  print intermediate (untagged) layers
+    -h, --help            show this help message and exit
+    -i, --intermediate    print intermediate (untagged) layers
+    --format {ascii,json}
+                          the output format
 
 module
 ~~~~~~
