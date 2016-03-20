@@ -18,19 +18,17 @@ except ImportError:
 
 
 class ImageLayerEncoder(json.JSONEncoder):
-    """
-    JSON Encoder for ImageLayer objects
-    """
+    """JSON Encoder for ImageLayer objects"""
 
-    def default(self, layer):
-        if isinstance(layer, docktree.ImageLayer.ImageLayer):
+    def default(self, obj):
+        if isinstance(obj, docktree.ImageLayer.ImageLayer):
             return {
-                'id': layer.identifier,
-                'children': layer.children,
-                'tags': layer.tags,
-                'size': layer.size,
+                'id': obj.identifier,
+                'children': obj.children,
+                'tags': obj.tags,
+                'size': obj.size,
             }
-        return json.JSONEncoder.default(self, layer)
+        return json.JSONEncoder.default(self, obj)
 
 
 def print_tree(heads, output_format='ascii'):
