@@ -6,6 +6,7 @@
 cli for docktree module
 """
 
+from __future__ import print_function
 import docktree
 import sys
 import argparse
@@ -21,7 +22,7 @@ def print_tree(heads):
     :param heads: heads of the tree
     """
     for head in heads:
-        head.print_children()
+        print(head.print_children())
 
 
 def parse_args(argv=sys.argv[1:]):
