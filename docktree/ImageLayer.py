@@ -101,14 +101,6 @@ class ImageLayer(object):
         """
         return self._identifier
 
-    @identifier.setter
-    def identifier(self, identifier):
-        """
-        set the identifier
-        :param identifier: identifier to set
-        """
-        self._identifier = identifier
-
     @identifier.deleter
     def identifier(self):
         """
