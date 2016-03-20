@@ -6,25 +6,31 @@ class ImageLayer(object):
     abstraction of a docker image layer
     """
 
-    def __init__(self, identifier, children=None, parent=None, tags=None):
+    def __init__(self, identifier, children=None, parent=None, tags=None, size=0):
         """
         create and initialize a new ImageLayer object
         :param identifier: unique string
         :param children: list of children as ImageLayer objects
         :param parent: parent as ImageLayer object
         :param tags: list of tags in unicode
+        :param size: size of the layer in bytes
         """
 
         self._identifier = identifier
         self._children = children if children is not None else []
         self._parent = parent
         self._tags = tags if tags is not None else []
+        self._size = size
 
     def __repr__(self):
         """
         :return: string containing a printable representation of a ImageLayer object
         """
-        return '{0} Tags: {1}'.format(self._identifier[:12], str(self._tags))
+        return '{layer_id} Tags: {layer_tag} Size: {layer_size}'.format(
+            layer_id=self._identifier[:12],
+            layer_tag=str(self._tags),
+            layer_size=_convert_size(self.size),
+        )
 
     def print_tree(self, indentation=''):
         """
@@ -135,3 +141,38 @@ class ImageLayer(object):
         delete all tags
         """
         del self._tags
+
+    @property
+    def size(self):
+        """
+        return the size of the layer in bytes
+        :return: size of the layer in bytes
+        :rtype: int
+        """
+        return self._size
+
+    @size.deleter
+    def size(self):
+        """
+        delete the size
+        """
+        del self._size
+
+
+def _convert_size(size):
+    """
+    converts size of image to a appropriate printable format
+    :param size: size of a image in bytes
+    :return: size of a image in appropriate printable format
+    :rtype: str
+    """
+    if size <= 1024:
+        return str(size) + ' B'
+    elif size <= 1024*1024:
+        return str(round(size/1024, 1)) + ' kiB'
+    elif size <= 1024*1024*1024:
+        return str(round(size/1024/1024, 1)) + ' MiB'
+    elif size <= 1024*1024*1024*1024:
+        return str(round(size/1024/1024/1024, 1)) + ' GiB'
+    else:
+        return str(size) + ' B'
