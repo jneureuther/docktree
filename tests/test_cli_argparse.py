@@ -1,6 +1,4 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 
 """Test the argparse parsers in cli"""
 
@@ -8,7 +6,7 @@ import unittest
 from .context import docktree_cli as cli
 
 
-class TestRequirementsParser(unittest.TestCase):
+class TestCliArgParse(unittest.TestCase):
     """Test the argparse parsers in cli"""
 
     def test_intermediate(self):
@@ -30,6 +28,3 @@ class TestRequirementsParser(unittest.TestCase):
         self.assertEqual('ascii', args.output_format)
         args = cli.parse_args('--format json'.split(' '))
         self.assertEqual('json', args.output_format)
-
-if __name__ == '__main__':
-    unittest.main()
