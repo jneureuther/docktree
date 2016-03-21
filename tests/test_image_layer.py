@@ -8,7 +8,7 @@ import random
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath('.'))
 
 from docktree.ImageLayer import ImageLayer
 from docktree.ImageLayer import _convert_size
