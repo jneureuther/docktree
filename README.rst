@@ -2,8 +2,14 @@ docktree
 ========
 
 .. image:: https://landscape.io/github/jneureuther/docktree/develop/landscape.svg?style=flat
-   :target: https://landscape.io/github/jneureuther/docktree/develop
-   :alt: Code Health
+    :target: https://landscape.io/github/jneureuther/docktree/develop
+    :alt: Code Health
+
+.. image:: https://codecov.io/github/jneureuther/docktree/coverage.svg?branch=develop
+    :target: https://codecov.io/github/jneureuther/docktree?branch=develop
+
+.. image:: https://travis-ci.org/jneureuther/docktree.svg?branch=develop
+    :target: https://travis-ci.org/jneureuther/docktree
 
 Analyse dependencies of docker images.
 
