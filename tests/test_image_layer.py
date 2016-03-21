@@ -5,8 +5,13 @@
 import unittest
 import string
 import random
-from .context import ImageLayer
-from .context import _convert_size
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath('..'))
+
+from docktree.ImageLayer import ImageLayer
+from docktree.ImageLayer import _convert_size
 
 
 class TestImageLayer(unittest.TestCase):

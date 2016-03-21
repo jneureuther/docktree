@@ -3,7 +3,12 @@
 """Test the argparse parsers in cli"""
 
 import unittest
-from .context import docktree_cli as cli
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath('..'))
+
+from bin import docktree_cli as cli
 
 
 class TestCliArgParse(unittest.TestCase):
