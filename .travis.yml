@@ -1,0 +1,10 @@
+language: python
+python:
+  - "2.7"
+  - "3.4"
+install:
+  - pip install -q codecov
+script:
+  - coverage run tests/context.py
+after_success:
+  - codecov
