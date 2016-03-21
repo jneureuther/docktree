@@ -3,6 +3,7 @@ python:
   - "2.7"
   - "3.4"
 install:
+  - ./setup.py install
   - pip install -q codecov
 script:
   - coverage run tests/all_tests.py
