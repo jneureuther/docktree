@@ -42,7 +42,7 @@ class ImageLayer(object):
         output = ''
         if self.parent is None:
             output += '- {lay}\n'.format(lay=self)
-        elif len(self.parent.children) >= 1:
+        elif self.parent.children:
             output += '{ind}|- {lay}\n'.format(ind=indentation, lay=self)
         for child in self._children:
             output += child.print_tree(indentation + '  ')
