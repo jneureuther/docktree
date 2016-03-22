@@ -27,8 +27,10 @@ class ImageLayerEncoder(json.JSONEncoder):
         """
         if isinstance(obj, docktree.ImageLayer.ImageLayer):
             return {
-                'id': obj.identifier,
+                'identifier': obj.identifier,
                 'children': obj.children,
+                'parent_identifier':
+                    obj.parent.identifier if obj.parent else '',
                 'tags': obj.tags,
                 'size': obj.size,
             }

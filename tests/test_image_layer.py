@@ -14,7 +14,7 @@ from docktree.ImageLayer import ImageLayer
 from docktree.ImageLayer import _convert_size
 
 
-def _generate_valid_identifier():
+def generate_valid_identifier():
     """:return a random but valid identifier for image layers"""
     allowed_id_chars = list(set(string.hexdigits.lower()))
     return ''.join(
@@ -22,7 +22,7 @@ def _generate_valid_identifier():
     )
 
 
-def _generate_tag():
+def generate_tag():
     """:return a random but valid tag for image layers"""
     allowed_tag_chars = string.ascii_letters + string.digits
     return ''.join(
@@ -41,29 +41,29 @@ class TestImageLayer(unittest.TestCase):
 
     def test_identifier_prop(self):
         """test the identifier property"""
-        identifier = _generate_valid_identifier()
+        identifier = generate_valid_identifier()
         layer = ImageLayer(identifier)
         self.assertEqual(identifier, layer.identifier)
         # change identifier
         self.assertRaises(
             AttributeError, setattr,
-            layer, 'identifier', _generate_valid_identifier()
+            layer, 'identifier', generate_valid_identifier()
         )
 
     def test_tags_prop(self):
         """test the tags property"""
-        identifier = _generate_valid_identifier()
-        tags = [_generate_tag() for _ in range(random.randint(0, 50))]
+        identifier = generate_valid_identifier()
+        tags = [generate_tag() for _ in range(random.randint(0, 50))]
         layer = ImageLayer(identifier, tags=tags)
         self.assertEqual(layer.tags, tags)
-        newtag = _generate_tag()
+        newtag = generate_tag()
         tags += newtag
         layer.tags.append(tags)
         self.assertEqual(layer.tags, tags)
 
     def test_size_prop(self):
         """test the tags property"""
-        identifier = _generate_valid_identifier()
+        identifier = generate_valid_identifier()
         size = random.randint(0, 9999999999999)
         layer = ImageLayer(identifier, size=size)
         self.assertEqual(layer.size, size)
@@ -75,14 +75,14 @@ class TestImageLayer(unittest.TestCase):
 
     def test_parent_children_prop(self):
         """test the parent and child property"""
-        id_child = _generate_valid_identifier()
+        id_child = generate_valid_identifier()
         layer_child = ImageLayer(
             identifier=id_child,
             tags=['child'],
             parent=None,
             children=None,
         )
-        id_parent = _generate_valid_identifier()
+        id_parent = generate_valid_identifier()
         layer_parent = ImageLayer(
             identifier=id_parent,
             tags=['parent'],
@@ -99,8 +99,8 @@ class TestImageLayer(unittest.TestCase):
 
     def test_repr(self):
         """test the __repr__ function"""
-        identifier = _generate_valid_identifier()
-        tags = [_generate_tag()]
+        identifier = generate_valid_identifier()
+        tags = [generate_tag()]
         size = random.randint(0, 9999999999999)
         size_human = _convert_size(size)
         layer = ImageLayer(identifier, tags=tags, size=size)
@@ -125,7 +125,7 @@ class TestImageLayer(unittest.TestCase):
 
     def test_print_tree(self):
         """test the print_tree function"""
-        id_child = _generate_valid_identifier()
+        id_child = generate_valid_identifier()
         size_child = 42*1024*1024*1024
         layer_child = ImageLayer(
             identifier=id_child,
@@ -134,7 +134,7 @@ class TestImageLayer(unittest.TestCase):
             children=None,
             size=size_child,
         )
-        id_parent = _generate_valid_identifier()
+        id_parent = generate_valid_identifier()
         size_parent = 10*1024*1024
         layer_parent = ImageLayer(
             identifier=id_parent,
