@@ -21,6 +21,10 @@ class ImageLayerEncoder(json.JSONEncoder):
     """JSON Encoder for ImageLayer objects"""
 
     def default(self, obj):
+        """return a serializable version of obj
+        :param obj: object to transform
+        :return: serializable version of obj
+        """
         if isinstance(obj, docktree.ImageLayer.ImageLayer):
             return {
                 'id': obj.identifier,
