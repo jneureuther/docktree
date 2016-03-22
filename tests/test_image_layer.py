@@ -18,7 +18,7 @@ def _generate_valid_identifier():
     """:return a random but valid identifier for image layers"""
     allowed_id_chars = list(set(string.hexdigits.lower()))
     return ''.join(
-        (random.choice(allowed_id_chars) for i in range(64))
+        (random.choice(allowed_id_chars) for _ in range(64))
     )
 
 
@@ -26,7 +26,7 @@ def _generate_tag():
     """:return a random but valid tag for image layers"""
     allowed_tag_chars = string.ascii_letters + string.digits
     return ''.join(
-        (random.choice(allowed_tag_chars) for i in range(
+        (random.choice(allowed_tag_chars) for _ in range(
             random.randint(1, 100)
         ))
     )
@@ -53,7 +53,7 @@ class TestImageLayer(unittest.TestCase):
     def test_tags_prop(self):
         """test the tags property"""
         identifier = _generate_valid_identifier()
-        tags = [_generate_tag() for i in range(random.randint(0, 50))]
+        tags = [_generate_tag() for _ in range(random.randint(0, 50))]
         layer = ImageLayer(identifier, tags=tags)
         self.assertEqual(layer.tags, tags)
         newtag = _generate_tag()
