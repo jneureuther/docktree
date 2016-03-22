@@ -51,12 +51,11 @@ Contributing
 | to spin up a virtual machine containing everything needed for development.
 | Docktree will be installed system-wide and a set of example data is generated.
 |
-| To copy new code into the vm run:
+| In order to automatically copy modified code into the vm run:
 
 .. code:: bash
 
-  vagrant rsync
-  sudo bash -c "cd /vagrant/ && python3 setup.py develop && cd -"
+  vagrant rsync-auto
 
 .. _Vagrant: https://www.vagrantup.com/
 
