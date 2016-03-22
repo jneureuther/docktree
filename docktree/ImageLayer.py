@@ -64,13 +64,6 @@ class ImageLayer(object):
         """
         self._children = children
 
-    @children.deleter
-    def children(self):
-        """
-        delete all children
-        """
-        del self._children
-
     def remove_child(self, child):
         """
         remove a specific child from the list of children
@@ -95,13 +88,6 @@ class ImageLayer(object):
         """
         self._parent = parent
 
-    @parent.deleter
-    def parent(self):
-        """
-        delete the parent
-        """
-        del self._parent
-
     @property
     def identifier(self):
         """
@@ -110,13 +96,6 @@ class ImageLayer(object):
         :rtype: str
         """
         return self._identifier
-
-    @identifier.deleter
-    def identifier(self):
-        """
-        delete the identifier
-        """
-        del self._identifier
 
     @property
     def tags(self):
@@ -135,13 +114,6 @@ class ImageLayer(object):
         """
         self._tags.append(tag)
 
-    @tags.deleter
-    def tags(self):
-        """
-        delete all tags
-        """
-        del self._tags
-
     @property
     def size(self):
         """
@@ -150,13 +122,6 @@ class ImageLayer(object):
         :rtype: int
         """
         return self._size
-
-    @size.deleter
-    def size(self):
-        """
-        delete the size
-        """
-        del self._size
 
 
 def _convert_size(size):
