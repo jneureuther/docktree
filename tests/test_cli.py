@@ -53,3 +53,9 @@ class TestCli(unittest.TestCase):
             testlayer.parent.identifier if testlayer.parent else ''
         )
         self.assertEqual(json_dict['size'], testlayer.size)
+        # test if json encoder can encode other objects
+        testobject = {'foo': [1, 2, 3], 'bar': {'a': 'b'}, 'baz': 42, }
+        json_object = json.loads(
+            json.dumps(testobject, cls=cli.ImageLayerEncoder)
+        )
+        self.assertEqual(testobject, json_object)
