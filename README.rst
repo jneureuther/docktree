@@ -6,8 +6,14 @@ docktree
   :alt: Code issues
 
 .. image:: https://landscape.io/github/jneureuther/docktree/develop/landscape.svg?style=flat
-   :target: https://landscape.io/github/jneureuther/docktree/develop
-   :alt: Code Health
+    :target: https://landscape.io/github/jneureuther/docktree/develop
+    :alt: Code Health
+
+.. image:: https://codecov.io/github/jneureuther/docktree/coverage.svg?branch=develop
+    :target: https://codecov.io/github/jneureuther/docktree?branch=develop
+
+.. image:: https://travis-ci.org/jneureuther/docktree.svg?branch=develop
+    :target: https://travis-ci.org/jneureuther/docktree
 
 Analyse dependencies of docker images.
 
@@ -58,6 +64,21 @@ Contributing
   vagrant rsync-auto
 
 .. _Vagrant: https://www.vagrantup.com/
+
+unittests
+~~~~~~~~~
+
+Provide unittests_ whenever you can.
+ - Name them ``test_foobar.py``.
+ - Run them by executing:
+
+.. _unittests: tests/
+
+.. code:: bash
+
+  ./setup.py test
+  # or
+  coverage run tests/all_tests.py
 
 License
 -------

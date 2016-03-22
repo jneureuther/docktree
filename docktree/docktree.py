@@ -4,7 +4,6 @@
 Analyse dependencies of docker images.
 """
 
-from __future__ import print_function
 from __future__ import absolute_import
 from .ImageLayer import ImageLayer
 

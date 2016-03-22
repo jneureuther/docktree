@@ -1,0 +1,15 @@
+language: python
+python:
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.5-dev"
+  - "nightly"
+install:
+  - ./setup.py install
+  - pip install -q codecov
+script:
+  - coverage run tests/all_tests.py
+after_success:
+  - codecov
