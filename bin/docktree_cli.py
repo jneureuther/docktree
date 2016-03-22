@@ -46,7 +46,7 @@ def print_tree(heads, output_format='ascii'):
     elif output_format == 'json':
         print(json.dumps(heads, cls=ImageLayerEncoder))
     else:
-        raise ValueError("invalid output_format '%s'" % output_format)
+        raise ValueError("invalid output_format '{0}'".format(output_format))
 
 
 def parse_args(argv=sys.argv[1:]):
