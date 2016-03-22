@@ -32,14 +32,14 @@ command-line
 
 .. code:: bash
 
-  usage: docktree-cli [-h] [-i] [--format {ascii,json}]
+  usage: docktree [-h] [-i] [-f {ascii,json}]
 
   cli for docktree module
 
   optional arguments:
     -h, --help            show this help message and exit
     -i, --intermediate    print intermediate (untagged) layers
-    --format {ascii,json}
+    -f {ascii,json}, --format {ascii,json}
                           the output format
 
 module
