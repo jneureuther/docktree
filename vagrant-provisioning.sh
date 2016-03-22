@@ -29,5 +29,5 @@ docker commit baz baz
 docker rm baz
 
 echo -e "\n==== install docktree ===="
-cd /vagrant && ./setup.py develop && cd -
+cd /vagrant && python3 setup.py develop && cd -
 activate-global-python-argcomplete
