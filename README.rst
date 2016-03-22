@@ -63,13 +63,17 @@ Contributing
 unittests
 ~~~~~~~~~
 
-Provide unittests_ whenever you can. Run them by executing:
+Provide unittests_ whenever you can.
+ - Name them ``test_foobar.py``.
+ - Run them by executing:
 
 .. _unittests: tests/
 
 .. code:: bash
 
   ./setup.py test
+  # or
+  coverage run tests/all_tests.py
 
 License
 -------
