@@ -31,7 +31,7 @@ class ImageLayer(object):
         :return: a printable representation of a ImageLayer object
         :rtype: string
         """
-        return '{layer_id} Tags: {layer_tag} Size: {layer_size}'.format(
+        return u'{layer_id} Tags: {layer_tag} Size: {layer_size}'.format(
             layer_id=self._identifier[:12],
             layer_tag=str(self._tags),
             layer_size=_convert_size(self.size),
@@ -132,12 +132,12 @@ class ImageLayer(object):
         return self._tags
 
     @tags.setter
-    def tags(self, tag):
+    def tags(self, tags):
         """
-        append a tag to the list of all tags
-        :param tag: tag to append
+        set the tags for this layer
+        :param tags: tags for the layer
         """
-        self._tags.append(tag)
+        self._tags = tags
 
     @property
     def size(self):
