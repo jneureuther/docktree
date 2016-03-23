@@ -56,9 +56,12 @@ def remove_untagged_layers(layers):
     :return: tree without untagged layers
     :rtype: dict
     """
+    layer_ids_to_remove = []
     for layer_id, layer in layers.items():
         if not layer.tags:
             layer.remove_from_chain()
-            layers.pop(layer_id)
+            layer_ids_to_remove.append(layer_id)
 
+    for layer_id in layer_ids_to_remove:
+        layers.pop(layer_id)
     return layers
