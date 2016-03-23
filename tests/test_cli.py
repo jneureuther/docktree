@@ -8,10 +8,9 @@ import os
 import random
 import json
 
-from tests.test_image_layer import generate_valid_identifier, generate_tag
-
 sys.path.insert(0, os.path.abspath('.'))
 
+from tests.test_image_layer import generate_valid_identifier, generate_tag
 from bin import docktree_cli as cli
 from docktree.ImageLayer import ImageLayer
 
