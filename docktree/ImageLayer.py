@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+Tools to make a tree data structure for Docker layers
+"""
+
 
 class ImageLayer(object):
     """
@@ -24,7 +28,8 @@ class ImageLayer(object):
 
     def __repr__(self):
         """
-        :return: string containing a printable representation of a ImageLayer object
+        :return: a printable representation of a ImageLayer object
+        :rtype: string
         """
         return '{layer_id} Tags: {layer_tag} Size: {layer_size}'.format(
             layer_id=self._identifier[:12],
