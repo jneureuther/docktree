@@ -33,8 +33,10 @@ class TestCli(unittest.TestCase):
         for i in range(len(self.layers) - 1):
             j = random.randint(i, len(self.layers) - 1)
             if i != j:
-                self.layers[i].parent = self.layers[j]
-                self.layers[j].children.append(self.layers[i])
+                ImageLayer.join_parent_child(
+                    parent=self.layers[j],
+                    child=self.layers[i],
+                )
 
     def test_json_encoder(self):
         """test the ImageLayerEncoder"""

@@ -73,29 +73,131 @@ class TestImageLayer(unittest.TestCase):
             layer, 'size', random.randint(0, 9999999999999)
         )
 
-    def test_parent_children_prop(self):
-        """test the parent and child property"""
+    def test_join_parent_child(self):
+        """test the join_parent_child function to build the tree"""
+        id_head = generate_valid_identifier()
+        layer_head = ImageLayer(
+            identifier=id_head,
+            tags=['head'],
+        )
+        id_middle = generate_valid_identifier()
+        layer_middle = ImageLayer(
+            identifier=id_middle,
+            tags=['middle'],
+        )
+        id_middle2 = generate_valid_identifier()
+        layer_middle2 = ImageLayer(
+            identifier=id_middle2,
+            tags=['middle2'],
+        )
         id_child = generate_valid_identifier()
         layer_child = ImageLayer(
             identifier=id_child,
             tags=['child'],
-            parent=None,
-            children=None,
         )
-        id_parent = generate_valid_identifier()
-        layer_parent = ImageLayer(
-            identifier=id_parent,
-            tags=['parent'],
-            parent=None,
-            children=[layer_child],
-        )
-        self.assertEqual(layer_parent.children[0], layer_child)
-        layer_child.parent = layer_parent
-        self.assertEqual(layer_child.parent, layer_parent)
-        layer_child.parent = None
+        self.assertIsNone(layer_head.parent)
+        self.assertIsNone(layer_middle.parent)
+        self.assertIsNone(layer_middle2.parent)
         self.assertIsNone(layer_child.parent)
-        layer_parent.remove_child(layer_child)
-        self.assertEqual(layer_parent.children, [])
+        self.assertEqual(len(layer_head.children), 0)
+        self.assertEqual(len(layer_middle.children), 0)
+        self.assertEqual(len(layer_middle2.children), 0)
+        self.assertEqual(len(layer_child.children), 0)
+        # join head and middle
+        ImageLayer.join_parent_child(parent=layer_head, child=layer_middle)
+        self.assertIsNone(layer_head.parent)
+        self.assertEqual(layer_middle.parent, layer_head)
+        self.assertIsNone(layer_middle2.parent)
+        self.assertIsNone(layer_child.parent)
+        self.assertEqual(len(layer_head.children), 1)
+        self.assertEqual(len(layer_middle.children), 0)
+        self.assertEqual(len(layer_middle2.children), 0)
+        self.assertEqual(len(layer_child.children), 0)
+        self.assertEqual(layer_head.children[0], layer_middle)
+        # join head and middle2
+        ImageLayer.join_parent_child(parent=layer_head, child=layer_middle2)
+        self.assertIsNone(layer_head.parent)
+        self.assertEqual(layer_middle.parent, layer_head)
+        self.assertEqual(layer_middle2.parent, layer_head)
+        self.assertIsNone(layer_child.parent)
+        self.assertEqual(len(layer_head.children), 2)
+        self.assertEqual(len(layer_middle.children), 0)
+        self.assertEqual(len(layer_middle2.children), 0)
+        self.assertEqual(len(layer_child.children), 0)
+        self.assertEqual(layer_head.children[0], layer_middle)
+        self.assertEqual(layer_head.children[1], layer_middle2)
+        # join middle and child
+        ImageLayer.join_parent_child(parent=layer_middle, child=layer_child)
+        self.assertIsNone(layer_head.parent)
+        self.assertEqual(layer_middle.parent, layer_head)
+        self.assertEqual(layer_middle2.parent, layer_head)
+        self.assertEqual(layer_child.parent, layer_middle)
+        self.assertEqual(len(layer_head.children), 2)
+        self.assertEqual(len(layer_middle.children), 1)
+        self.assertEqual(len(layer_middle2.children), 0)
+        self.assertEqual(len(layer_child.children), 0)
+        self.assertEqual(layer_head.children[0], layer_middle)
+        self.assertEqual(layer_head.children[1], layer_middle2)
+        self.assertEqual(layer_middle.children[0], layer_child)
+
+    def test_remove_from_chain(self):
+        """Test the remove_from_chain function to reduce the tree"""
+        id_head = generate_valid_identifier()
+        layer_head = ImageLayer(
+            identifier=id_head,
+            tags=['head'],
+        )
+        id_middle = generate_valid_identifier()
+        layer_middle = ImageLayer(
+            identifier=id_middle,
+            tags=['middle'],
+        )
+        id_middle2 = generate_valid_identifier()
+        layer_middle2 = ImageLayer(
+            identifier=id_middle2,
+            tags=['middle2'],
+        )
+        id_child = generate_valid_identifier()
+        layer_child = ImageLayer(
+            identifier=id_child,
+            tags=['child'],
+        )
+        # build tree
+        ImageLayer.join_parent_child(parent=layer_head, child=layer_middle)
+        ImageLayer.join_parent_child(parent=layer_head, child=layer_middle2)
+        ImageLayer.join_parent_child(parent=layer_middle, child=layer_child)
+        # remove middle2 from chain
+        layer_middle2.remove_from_chain()
+        self.assertIsNone(layer_head.parent)
+        self.assertEqual(layer_middle.parent, layer_head)
+        self.assertIsNone(layer_middle2.parent)
+        self.assertEqual(layer_child.parent, layer_middle)
+        self.assertEqual(len(layer_head.children), 1)
+        self.assertEqual(len(layer_middle.children), 1)
+        self.assertEqual(len(layer_middle2.children), 0)
+        self.assertEqual(len(layer_child.children), 0)
+        self.assertEqual(layer_head.children[0], layer_middle)
+        self.assertEqual(layer_middle.children[0], layer_child)
+        # remove middle from chain
+        layer_middle.remove_from_chain()
+        self.assertIsNone(layer_head.parent)
+        self.assertIsNone(layer_middle.parent)
+        self.assertIsNone(layer_middle2.parent)
+        self.assertEqual(layer_child.parent, layer_head)
+        self.assertEqual(len(layer_head.children), 1)
+        self.assertEqual(len(layer_middle.children), 0)
+        self.assertEqual(len(layer_middle2.children), 0)
+        self.assertEqual(len(layer_child.children), 0)
+        # remove head from chain
+        layer_head.remove_from_chain()
+        self.assertIsNone(layer_head.parent)
+        self.assertIsNone(layer_middle.parent)
+        self.assertIsNone(layer_middle2.parent)
+        self.assertIsNone(layer_child.parent)
+        self.assertEqual(len(layer_head.children), 0)
+        self.assertEqual(len(layer_middle.children), 0)
+        self.assertEqual(len(layer_middle2.children), 0)
+        self.assertEqual(len(layer_child.children), 0)
 
     def test_repr(self):
         """test the __repr__ function"""
@@ -130,8 +232,6 @@ class TestImageLayer(unittest.TestCase):
         layer_child = ImageLayer(
             identifier=id_child,
             tags=['child'],
-            parent=None,
-            children=None,
             size=size_child,
         )
         id_parent = generate_valid_identifier()
@@ -139,11 +239,9 @@ class TestImageLayer(unittest.TestCase):
         layer_parent = ImageLayer(
             identifier=id_parent,
             tags=['parent'],
-            parent=None,
-            children=[layer_child],
             size=size_parent,
         )
-        layer_child.parent = layer_parent
+        ImageLayer.join_parent_child(parent=layer_parent, child=layer_child)
         self.assertEqual(
             layer_parent.print_tree(),
             "- {id_head} Tags: ['parent'] Size: {size_head}\n"

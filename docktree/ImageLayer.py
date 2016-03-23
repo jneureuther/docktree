@@ -6,7 +6,7 @@ class ImageLayer(object):
     abstraction of a docker image layer
     """
 
-    def __init__(self, identifier, children=None, parent=None, tags=None, size=0):
+    def __init__(self, identifier, tags=None, size=0):
         """
         create and initialize a new ImageLayer object
         :param identifier: unique string
@@ -17,10 +17,10 @@ class ImageLayer(object):
         """
 
         self._identifier = identifier
-        self._children = children if children is not None else []
-        self._parent = parent
         self._tags = tags if tags is not None else []
         self._size = size
+        self._parent = None
+        self._children = []
 
     def __repr__(self):
         """
@@ -48,6 +48,33 @@ class ImageLayer(object):
             output += child.print_tree(indentation + '  ')
         return output
 
+    @staticmethod
+    def join_parent_child(parent, child):
+        """add child to the parent's childs and set child.parent to parent"""
+        parent.children.append(child)
+        child.parent = parent
+
+    def remove_from_chain(self):
+        """
+        removes the layer from the double linked list.
+        It appends all children to it's parent and
+        sets the new parent of all children
+        """
+        for child in self.children:
+            child.parent = self.parent
+            if not self.is_head():
+                self.parent.children.append(child)
+            self.children.remove(child)
+        if not self.is_head():
+            self.parent.children.remove(self)
+            self.parent = None
+
+    def is_head(self):
+        """
+        :return True if this layer is a head / if this layer has no parent
+        """
+        return self.parent is None
+
     @property
     def children(self):
         """
@@ -63,13 +90,6 @@ class ImageLayer(object):
         :param children: children to append
         """
         self._children = children
-
-    def remove_child(self, child):
-        """
-        remove a specific child from the list of children
-        :param child: child to remove
-        """
-        self._children.remove(child)
 
     @property
     def parent(self):

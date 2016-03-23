@@ -24,15 +24,17 @@ def analyse_layers():
     for image in images:
         layer = ImageLayer(
             identifier=image['Id'],
-            tags=image['RepoTags'],
+            tags=[tag for tag in image['RepoTags'] if tag != '<none>:<none>'],
             size=image['VirtualSize'],
         )
         layers[image['Id']] = layer
 
     for image in images:
         if image['ParentId'] != '':
-            layers[image['ParentId']].children.append(layers[image['Id']])
-            layers[image['Id']].parent = layers[image['ParentId']]
+            ImageLayer.join_parent_child(
+                parent=layers[image['ParentId']],
+                child=layers[image['Id']],
+            )
 
     return layers
 
@@ -44,7 +46,7 @@ def get_heads(layers):
     :return: heads of the tree
     :rtype: list
     """
-    return [layer for layer in layers.values() if layer.parent is None]
+    return [layer for layer in layers.values() if layer.is_head()]
 
 
 def remove_untagged_layers(layers):
@@ -54,23 +56,9 @@ def remove_untagged_layers(layers):
     :return: tree without untagged layers
     :rtype: dict
     """
-    empty_tags = []
-
     for layer_id, layer in layers.items():
-        if layer.tags[0] == '<none>:<none>':
-            empty_tags.append(layer_id)
-            if layer.parent is not None:
-                layer.parent.remove_child(layer)
-                for child in layer.children:
-                    layer.parent.children.append(child)
-            else:
-                for child in layer.children:
-                    child.parent = None
-            if layer.children is not None:
-                for child in layer.children:
-                    child.parent = layer.parent
-
-    for tag in empty_tags:
-        layers.pop(tag)
+        if not layer.tags:
+            layer.remove_from_chain()
+            layers.pop(layer_id)
 
     return layers
