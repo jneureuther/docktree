@@ -26,11 +26,8 @@ class ImageLayer(object):
         self._parent = None
         self._children = []
 
-    def __repr__(self):
-        """
-        :return: a printable representation of a ImageLayer object
-        :rtype: string
-        """
+    def __str__(self):
+        """:return: a printable description of a ImageLayer object as string"""
         return u'{layer_id} Tags: {layer_tag} Size: {layer_size}'.format(
             layer_id=self._identifier[:12],
             layer_tag=str(self._tags),
@@ -46,9 +43,9 @@ class ImageLayer(object):
         """
         output = ''
         if self.parent is None:
-            output += '- {lay}\n'.format(lay=self)
+            output += '- {lay}\n'.format(lay=str(self))
         elif self.parent.children:
-            output += '{ind}|- {lay}\n'.format(ind=indentation, lay=self)
+            output += '{ind}|- {lay}\n'.format(ind=indentation, lay=str(self))
         for child in self._children:
             output += child.print_tree(indentation + '  ')
         return output

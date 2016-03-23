@@ -199,7 +199,7 @@ class TestImageLayer(unittest.TestCase):
         self.assertEqual(len(layer_middle2.children), 0)
         self.assertEqual(len(layer_child.children), 0)
 
-    def test_repr(self):
+    def test_str(self):
         """test the __repr__ function"""
         identifier = generate_valid_identifier()
         tags = [generate_tag()]
@@ -207,7 +207,7 @@ class TestImageLayer(unittest.TestCase):
         size_human = _convert_size(size)
         layer = ImageLayer(identifier, tags=tags, size=size)
         self.assertEqual(
-            repr(layer),
+            str(layer),
             "{0} Tags: {1} Size: {2}".format(identifier[:12], tags, size_human)
         )
 
