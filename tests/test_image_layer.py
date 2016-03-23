@@ -60,6 +60,9 @@ class TestImageLayer(unittest.TestCase):
         tags += newtag
         layer.tags.append(tags)
         self.assertEqual(layer.tags, tags)
+        tags = [generate_tag() for _ in range(2)]
+        layer.tags = tags
+        self.assertEqual(layer.tags, tags)
 
     def test_size_prop(self):
         """test the tags property"""
@@ -200,7 +203,7 @@ class TestImageLayer(unittest.TestCase):
         self.assertEqual(len(layer_child.children), 0)
 
     def test_str(self):
-        """test the __repr__ function"""
+        """test the __str__ function"""
         identifier = generate_valid_identifier()
         tags = [generate_tag()]
         size = random.randint(0, 9999999999999)

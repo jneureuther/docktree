@@ -66,7 +66,7 @@ class ImageLayer(object):
             child.parent = self.parent
             if not self.is_head():
                 self.parent.children.append(child)
-            self.children.remove(child)
+        self.children = []
         if not self.is_head():
             self.parent.children.remove(self)
             self.parent = None
