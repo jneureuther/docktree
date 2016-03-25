@@ -17,26 +17,6 @@ except ImportError:
     pass
 
 
-class ImageLayerEncoder(json.JSONEncoder):
-    """JSON Encoder for ImageLayer objects"""
-
-    def default(self, obj):
-        """return a serializable version of obj
-        :param obj: object to transform
-        :return: serializable version of obj
-        """
-        if isinstance(obj, docktree.ImageLayer.ImageLayer):
-            return {
-                'identifier': obj.identifier,
-                'children': obj.children,
-                'parent_identifier':
-                    obj.parent.identifier if obj.parent else '',
-                'tags': obj.tags,
-                'size': obj.size,
-            }
-        return json.JSONEncoder.default(self, obj)
-
-
 def print_tree(heads, output_format='ascii'):
     """
     print a tree starting at heads to stdout
@@ -46,7 +26,7 @@ def print_tree(heads, output_format='ascii'):
         for head in heads:
             print(head.print_tree())
     elif output_format == 'json':
-        print(json.dumps(heads, cls=ImageLayerEncoder))
+        print(json.dumps([dict(layer) for layer in heads]))
     else:
         raise ValueError("invalid output_format '{0}'".format(output_format))
 

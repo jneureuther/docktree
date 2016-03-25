@@ -27,12 +27,32 @@ class ImageLayer(object):
         self._children = []
 
     def __str__(self):
-        """:return: a printable description of a ImageLayer object as string"""
+        """
+        :return: a printable description of an ImageLayer object as string
+        """
         return u'{layer_id} Tags: {layer_tag} Size: {layer_size}'.format(
             layer_id=self._identifier[:12],
             layer_tag=str(self._tags),
             layer_size=_convert_size(self.size),
         )
+
+    def __iter__(self):
+        """makes ImageLayer object iterable (e.g. for dict(layer))"""
+        yield('Id', self.identifier)
+        yield('ParentId', self.parent.identifier if self.parent else '')
+        yield('RepoTags', self.tags)
+        yield('VirtualSize', self.size)
+        yield('Children', [dict(child) for child in self.children])
+
+    def __dict__(self):
+        """:return: a dict representing an ImageLayer object"""
+        return {
+            'Id': self.identifier,
+            'ParentId': self.parent.identifier if self.parent else '',
+            'RepoTags': str(self.tags),
+            'VirtualSize': self.size,
+            'Children': [dict(child) for child in self.children],
+        }
 
     def print_tree(self, indentation=''):
         """
