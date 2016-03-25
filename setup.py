@@ -6,12 +6,23 @@ Setup script
 """
 
 from setuptools import setup
+import os
 
-with open('README.rst') as f:
-    README_FILE = f.read()
 
-with open('LICENSE') as f:
-    LICENSE_FILE = f.read()
+def read(fname):
+    """returns the text of a file"""
+    return open(os.path.join(os.path.dirname(__file__), fname), 'r').read()
+
+
+def get_requirements(filename="requirements.txt"):
+    """returns a list of all requirements"""
+    text = read(filename)
+    requirements = []
+    for line in text.splitlines():
+        req = line.split('#')[0].strip()
+        if req != '':
+            requirements.append(req)
+    return requirements
 
 setup(
     name='docktree',
@@ -30,17 +41,13 @@ setup(
         'Topic :: Utilities'
     ],
     description='analyse dependencies of docker images',
-    long_description=README_FILE,
+    long_description=read('README.rst'),
     url='https://github.com/jneureuther/docktree',
     author='Julian Neureuther',
     author_email='dev@jneureuther.de',
-    license=LICENSE_FILE,
+    license=read('LICENSE'),
     packages=['docktree'],
     scripts=['bin/docktree'],
     test_suite="tests",
-    install_requires=[
-        'argparse',
-        'argcomplete>=1.1.0',
-        'docker-py>=1.7.2'
-    ]
+    install_requires=get_requirements(),
 )
