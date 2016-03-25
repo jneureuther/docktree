@@ -44,16 +44,6 @@ class ImageLayer(object):
         yield('VirtualSize', self.size)
         yield('Children', [dict(child) for child in self.children])
 
-    def __dict__(self):
-        """:return: a dict representing an ImageLayer object"""
-        return {
-            'Id': self.identifier,
-            'ParentId': self.parent.identifier if self.parent else '',
-            'RepoTags': str(self.tags),
-            'VirtualSize': self.size,
-            'Children': [dict(child) for child in self.children],
-        }
-
     def print_tree(self, indentation=''):
         """
         print a tree following the double-linked list
