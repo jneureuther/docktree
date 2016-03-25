@@ -214,6 +214,35 @@ class TestImageLayer(unittest.TestCase):
             "{0} Tags: {1} Size: {2}".format(identifier[:12], tags, size_human)
         )
 
+    def test_iter(self):
+        """test the __iter__ function"""
+        layer_parent = ImageLayer(
+            identifier=generate_valid_identifier(),
+            tags=[generate_tag() for _ in range(random.randint(0, 5))],
+            size=random.randint(0, 1024*1024*1024*1024)
+        )
+        layer_child = ImageLayer(
+            identifier=generate_valid_identifier(),
+            tags=[generate_tag() for _ in range(random.randint(0, 5))],
+            size=random.randint(0, 1024*1024*1024*1024)
+        )
+        ImageLayer.join_parent_child(
+            parent=layer_parent,
+            child=layer_child,
+        )
+        dict_parent = dict(layer_parent)
+        dict_child = dict(layer_child)
+        self.assertEqual(dict_parent['Id'], layer_parent.identifier)
+        self.assertEqual(dict_parent['ParentId'], '')
+        self.assertEqual(dict_parent['RepoTags'], layer_parent.tags)
+        self.assertEqual(dict_parent['VirtualSize'], layer_parent.size)
+        self.assertEqual(dict_parent['Children'], [dict(layer_child)])
+        self.assertEqual(dict_child['Id'], layer_child.identifier)
+        self.assertEqual(dict_child['ParentId'], layer_parent.identifier)
+        self.assertEqual(dict_child['RepoTags'], layer_child.tags)
+        self.assertEqual(dict_child['VirtualSize'], layer_child.size)
+        self.assertEqual(dict_child['Children'], [])
+
     def test_convert_size(self):
         """test the size to human conversation"""
         self.assertEqual(_convert_size(0), '0 B')
