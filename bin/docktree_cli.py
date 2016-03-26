@@ -23,10 +23,12 @@ def print_tree(heads, output_format='ascii'):
     :param heads: heads of the tree
     """
     if output_format == 'ascii':
+        out = ''
         for head in heads:
-            print(head.print_tree())
+            out += head.print_tree()
+        return out
     elif output_format == 'json':
-        print(json.dumps([dict(layer) for layer in heads]))
+        return json.dumps([dict(layer) for layer in heads])
     else:
         raise ValueError("invalid output_format '{0}'".format(output_format))
 
@@ -73,7 +75,7 @@ def main():
     if not args.print_intermediate:
         layers = docktree.remove_untagged_layers(layers)
     heads = docktree.get_heads(layers)
-    print_tree(heads, output_format=args.output_format)
+    print(print_tree(heads, output_format=args.output_format))
 
 if __name__ == '__main__':
     main()
