@@ -8,6 +8,7 @@ import os
 import random
 import json
 import re
+import math
 
 sys.path.insert(0, os.path.abspath('.'))
 
@@ -101,7 +102,11 @@ class TestCli(unittest.TestCase):
                 self.heads[i].identifier[:12]
             )
             self.assertEqual(text_heads[i].tags, self.heads[i].tags)
-            self.assertAlmostEqual(text_heads[i].size, self.heads[i].size, -5)
+            divide_unsignificant = 10**(int(math.log10(self.heads[i].size))-1)
+            self.assertEqual(
+                text_heads[i].size // divide_unsignificant,
+                self.heads[i].size // divide_unsignificant
+            )
             self.assertEqual(
                 len(text_heads[i].children),
                 len(self.heads[i].children)
