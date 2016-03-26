@@ -8,13 +8,13 @@ import os
 import random
 import json
 import re
-import math
 
 sys.path.insert(0, os.path.abspath('.'))
 
 from tests.test_image_layer import generate_valid_identifier, generate_tag
 from bin import docktree_cli as cli
 from docktree.ImageLayer import ImageLayer
+from docktree.ImageLayer import _convert_size
 
 
 def generate_random_layer():
@@ -102,10 +102,9 @@ class TestCli(unittest.TestCase):
                 self.heads[i].identifier[:12]
             )
             self.assertEqual(text_heads[i].tags, self.heads[i].tags)
-            divide_unsignificant = 10**(int(math.log10(self.heads[i].size))-1)
             self.assertEqual(
-                text_heads[i].size // divide_unsignificant,
-                self.heads[i].size // divide_unsignificant
+                _convert_size(text_heads[i].size),
+                _convert_size(self.heads[i].size)
             )
             self.assertEqual(
                 len(text_heads[i].children),
