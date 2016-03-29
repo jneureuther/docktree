@@ -17,11 +17,14 @@ from docktree.ImageLayer import ImageLayer
 from docktree.ImageLayer import _convert_size
 
 
-def generate_random_layer():
-    """generates a layer with random tags and id"""
+def generate_random_layer(max_tag_count=2):
+    """
+    :return a layer with random tags and id
+    :param max_tag_count: the maximum count of tags the layer should have
+    """
     return ImageLayer(
         identifier=generate_valid_identifier(),
-        tags=[generate_tag() for _ in range(random.randint(0, 2))],
+        tags=[generate_tag() for _ in range(random.randint(0, max_tag_count))],
         size=random.randint(0, 1024*1024*1024)
     )
 
