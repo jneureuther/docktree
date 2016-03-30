@@ -56,7 +56,7 @@ class TestCli(unittest.TestCase):
         json_heads = json.loads(text)
         self.assertEqual(len(json_heads), len(self.heads))
         for i, layer in enumerate(self.heads):
-            self.assertEqual(json_heads[i], dict(layer))
+            self.assertDictEqual(json_heads[i], dict(layer))
 
     def test_print_tree_default(self):
         """test if the default output_format of print_tree is ascii"""
@@ -104,7 +104,7 @@ class TestCli(unittest.TestCase):
                 text_heads[i].identifier,
                 layer.identifier[:12]
             )
-            self.assertEqual(text_heads[i].tags, layer.tags)
+            self.assertListEqual(text_heads[i].tags, layer.tags)
             self.assertEqual(
                 _convert_size(text_heads[i].size),
                 _convert_size(layer.size)

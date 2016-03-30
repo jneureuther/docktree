@@ -39,9 +39,8 @@ class TestDocktree(unittest.TestCase):
     def test_get_heads(self):
         """test the get_heads method returns a list of heads"""
         heads = docktree.get_heads(self.layers)
-        self.assertEqual(len(heads), len(self.heads))
+        self.assertListEqual(heads, self.heads)
         for layer in heads:
-            self.assertIn(layer, self.heads)
             self.assertTrue(layer.is_head())
 
     def test_remove_untagged_layers(self):
@@ -55,7 +54,7 @@ class TestDocktree(unittest.TestCase):
             self.assertEqual(tagged_layers[identifier].identifier, identifier)
         # check if test_layers has changed (when copy() is missing)
         for identifier, layer in self.layers.items():
-            self.assertEqual(dict(layer), dict(test_layers[identifier]))
+            self.assertDictEqual(dict(layer), dict(test_layers[identifier]))
         # check if items in tagged_layers have the same values for their
         # properties as in test_layers
         for identifier, layer in tagged_layers.items():
@@ -67,7 +66,7 @@ class TestDocktree(unittest.TestCase):
                 layer.size,
                 test_layers[identifier].size
             )
-            self.assertEqual(
+            self.assertListEqual(
                 layer.tags,
                 test_layers[identifier].tags
             )
