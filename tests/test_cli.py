@@ -120,10 +120,4 @@ class TestCli(unittest.TestCase):
                 len(text_heads[i].children),
                 len(layer.children)
             )
-            if layer.parent:
-                self.assertEqual(
-                    text_heads[i].parent.identifier,
-                    layer.parent.identifier
-                )
-            else:
-                self.assertIsNone(text_heads[i].parent)
+            self.assertTrue(text_heads[i].is_head())

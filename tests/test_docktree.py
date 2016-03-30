@@ -22,7 +22,7 @@ def generate_random_api_layer(max_tag_count=2):
     :param max_tag_count: the maximum count of tags the layer should have
     """
     repo_digests = []
-    tags = [generate_tag() for _ in range(max_tag_count)]
+    tags = [generate_tag() for _ in range(random.randint(0, max_tag_count))]
     if not tags:
         tags.append('<none>:<none>')
         repo_digests.append('<none>@<none>')
