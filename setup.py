@@ -7,6 +7,8 @@ Setup script
 
 from setuptools import setup
 import os
+from docktree import __name__ as project_name, __doc__ as description
+from docktree import __author__, __email__, __url__
 
 
 def read(fname):
@@ -25,7 +27,7 @@ def get_requirements(filename="requirements.txt"):
     return requirements
 
 setup(
-    name='docktree',
+    name=project_name,
     version='0.1',
     # see https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
@@ -40,14 +42,14 @@ setup(
         'Programming Language :: Python :: 3',
         'Topic :: Utilities'
     ],
-    description='analyse dependencies of docker images',
+    description=description,
     long_description=read('README.rst'),
-    url='https://github.com/jneureuther/docktree',
-    author='Julian Neureuther',
-    author_email='dev@jneureuther.de',
+    url=__url__,
+    author=__author__,
+    author_email=__email__,
     license=read('LICENSE'),
-    packages=['docktree'],
-    scripts=['bin/docktree'],
+    packages=[project_name],
+    scripts=['bin/{0}'.format(project_name)],
     test_suite="tests",
     install_requires=get_requirements(),
 )
