@@ -10,9 +10,9 @@ from copy import deepcopy
 
 sys.path.insert(0, os.path.abspath('.'))
 
-from tests.test_cli import generate_random_layer
+from tests.test_cli import generate_random_layer, connect_layers_random
+from tests.test_image_layer import generate_valid_identifier, generate_tag
 
-from docktree.ImageLayer import ImageLayer
 from docktree import docktree
 
 
@@ -26,13 +26,7 @@ class TestDocktree(unittest.TestCase):
             layer = generate_random_layer(max_tag_count=random.randint(0, 2))
             self.layers[layer.identifier] = layer
         # connect parent and child
-        for i, layer in enumerate(self.layers.values()):
-            j = random.randint(i, len(self.layers) - 1)
-            if i != j:
-                ImageLayer.join_parent_child(
-                    parent=list(self.layers.values())[j],
-                    child=layer,
-                )
+        connect_layers_random(list(self.layers.values()))
         # example implementation of get_heads
         self.heads = [lay for lay in self.layers.values() if lay.is_head()]
 

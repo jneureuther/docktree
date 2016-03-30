@@ -19,7 +19,7 @@ from docktree.ImageLayer import _convert_size
 
 def generate_random_layer(max_tag_count=2):
     """
-    :return a layer with random tags and id
+    :return: a layer with random tags and id
     :param max_tag_count: the maximum count of tags the layer should have
     """
     return ImageLayer(
@@ -29,6 +29,19 @@ def generate_random_layer(max_tag_count=2):
     )
 
 
+def connect_layers_random(layers_list):
+    """
+    connects some layers in list layers_list randomly to a tree
+    by using join_parent_child
+    :param layers_list: a list of ImageLayer instances
+    """
+    for i, layer in enumerate(layers_list[:-1]):
+        ImageLayer.join_parent_child(
+            parent=random.choice(layers_list[i+1:]),
+            child=layer
+        )
+
+
 class TestCli(unittest.TestCase):
     """Test the cli script"""
 
@@ -36,13 +49,7 @@ class TestCli(unittest.TestCase):
         """generate some ImageLayers"""
         self.layers = [generate_random_layer() for _ in range(10)]
         # connect parent and child
-        for i, layer in enumerate(self.layers):
-            j = random.randint(i, len(self.layers) - 1)
-            if i != j:
-                ImageLayer.join_parent_child(
-                    parent=self.layers[j],
-                    child=layer,
-                )
+        connect_layers_random(self.layers)
         self.heads = [layer for layer in self.layers if layer.parent is None]
 
     def test_print_tree_invalid(self):
