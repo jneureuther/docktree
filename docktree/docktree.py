@@ -8,6 +8,7 @@ from __future__ import absolute_import
 from .ImageLayer import ImageLayer
 
 import docker
+import copy
 
 
 def analyse_layers():
@@ -51,17 +52,18 @@ def get_heads(layers):
 
 def remove_untagged_layers(layers):
     """
-    remove all untagged layers from the tree
+    copy the layers dict and remove all untagged layers from the tree
     :param layers: dict containing all layers
     :return: tree without untagged layers
     :rtype: dict
     """
+    layers_cpy = copy.deepcopy(layers)
     layer_ids_to_remove = []
-    for layer_id, layer in layers.items():
+    for layer_id, layer in layers_cpy.items():
         if not layer.tags:
             layer.remove_from_chain()
             layer_ids_to_remove.append(layer_id)
 
     for layer_id in layer_ids_to_remove:
-        layers.pop(layer_id)
-    return layers
+        layers_cpy.pop(layer_id)
+    return layers_cpy
