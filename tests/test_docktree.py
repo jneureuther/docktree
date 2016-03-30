@@ -25,12 +25,12 @@ class TestDocktree(unittest.TestCase):
             layer = generate_random_layer(max_tag_count=random.randint(0, 2))
             self.layers[layer.identifier] = layer
         # connect parent and child
-        for i in range(len(self.layers) - 1):
+        for i, layer in enumerate(self.layers.values()):
             j = random.randint(i, len(self.layers) - 1)
             if i != j:
                 ImageLayer.join_parent_child(
                     parent=list(self.layers.values())[j],
-                    child=list(self.layers.values())[i],
+                    child=layer,
                 )
         # example implementation of get_heads
         self.heads = [lay for lay in self.layers.values() if lay.is_head()]

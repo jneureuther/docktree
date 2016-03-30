@@ -36,12 +36,12 @@ class TestCli(unittest.TestCase):
         """generate some ImageLayers"""
         self.layers = [generate_random_layer() for _ in range(10)]
         # connect parent and child
-        for i in range(len(self.layers) - 1):
+        for i, layer in enumerate(self.layers):
             j = random.randint(i, len(self.layers) - 1)
             if i != j:
                 ImageLayer.join_parent_child(
                     parent=self.layers[j],
-                    child=self.layers[i],
+                    child=layer,
                 )
         self.heads = [layer for layer in self.layers if layer.parent is None]
 
@@ -55,8 +55,8 @@ class TestCli(unittest.TestCase):
         text = cli.print_tree(self.heads, output_format='json')
         json_heads = json.loads(text)
         self.assertEqual(len(json_heads), len(self.heads))
-        for i in range(len(self.heads)):
-            self.assertEqual(json_heads[i], dict(self.heads[i]))
+        for i, layer in enumerate(self.heads):
+            self.assertEqual(json_heads[i], dict(layer))
 
     def test_print_tree_default(self):
         """test if the default output_format of print_tree is ascii"""
@@ -99,24 +99,24 @@ class TestCli(unittest.TestCase):
                 )
             # else: we're only testing the heads and their children
             # (not the childs of childs)
-        for i in range(len(self.heads)):
+        for i, layer in enumerate(self.heads):
             self.assertEqual(
                 text_heads[i].identifier,
-                self.heads[i].identifier[:12]
+                layer.identifier[:12]
             )
-            self.assertEqual(text_heads[i].tags, self.heads[i].tags)
+            self.assertEqual(text_heads[i].tags, layer.tags)
             self.assertEqual(
                 _convert_size(text_heads[i].size),
-                _convert_size(self.heads[i].size)
+                _convert_size(layer.size)
             )
             self.assertEqual(
                 len(text_heads[i].children),
-                len(self.heads[i].children)
+                len(layer.children)
             )
-            if self.heads[i].parent:
+            if layer.parent:
                 self.assertEqual(
                     text_heads[i].parent.identifier,
-                    self.heads[i].parent.identifier
+                    layer.parent.identifier
                 )
             else:
                 self.assertIsNone(text_heads[i].parent)
