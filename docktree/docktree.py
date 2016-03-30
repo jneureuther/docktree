@@ -17,14 +17,16 @@ def _fetch_all_layers():
     return docker_cli.images(all=True)
 
 
-def analyse_layers(images=_fetch_all_layers()):
+def analyze_layers(images=None):
     """
-    analyse all layers and compute a tree
+    analyze all layers and compute a tree
     :param images: list of dicts of images provided by docker api (optional)
     :return: dict of images. Key is identifier, value is instance of ImageLayer
     :rtype: dict
     """
 
+    if not images:
+        images = _fetch_all_layers()
     layers = {}
 
     for image in images:

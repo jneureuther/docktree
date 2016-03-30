@@ -71,7 +71,7 @@ def main():
     """
     args = parse_args()
 
-    layers = docktree.analyse_layers()
+    layers = docktree.analyze_layers()
     if not args.print_intermediate:
         layers = docktree.remove_untagged_layers(layers)
     heads = docktree.get_heads(layers)
