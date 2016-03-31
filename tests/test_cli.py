@@ -17,13 +17,29 @@ from docktree.ImageLayer import ImageLayer
 from docktree.ImageLayer import _convert_size
 
 
-def generate_random_layer():
-    """generates a layer with random tags and id"""
+def generate_random_layer(max_tag_count=2):
+    """
+    :return: a layer with random tags and id
+    :param max_tag_count: the maximum count of tags the layer should have
+    """
     return ImageLayer(
         identifier=generate_valid_identifier(),
-        tags=[generate_tag() for _ in range(random.randint(0, 2))],
+        tags=[generate_tag() for _ in range(random.randint(0, max_tag_count))],
         size=random.randint(0, 1024*1024*1024)
     )
+
+
+def connect_layers_random(layers_list):
+    """
+    connects some layers in list layers_list randomly to a tree
+    by using join_parent_child
+    :param layers_list: a list of ImageLayer instances
+    """
+    for i, layer in enumerate(layers_list[:-1]):
+        ImageLayer.join_parent_child(
+            parent=random.choice(layers_list[i+1:]),
+            child=layer
+        )
 
 
 class TestCli(unittest.TestCase):
@@ -33,13 +49,7 @@ class TestCli(unittest.TestCase):
         """generate some ImageLayers"""
         self.layers = [generate_random_layer() for _ in range(10)]
         # connect parent and child
-        for i in range(len(self.layers) - 1):
-            j = random.randint(i, len(self.layers) - 1)
-            if i != j:
-                ImageLayer.join_parent_child(
-                    parent=self.layers[j],
-                    child=self.layers[i],
-                )
+        connect_layers_random(self.layers)
         self.heads = [layer for layer in self.layers if layer.parent is None]
 
     def test_print_tree_invalid(self):
@@ -52,8 +62,8 @@ class TestCli(unittest.TestCase):
         text = cli.print_tree(self.heads, output_format='json')
         json_heads = json.loads(text)
         self.assertEqual(len(json_heads), len(self.heads))
-        for i in range(len(self.heads)):
-            self.assertEqual(json_heads[i], dict(self.heads[i]))
+        for i, layer in enumerate(self.heads):
+            self.assertDictEqual(json_heads[i], dict(layer))
 
     def test_print_tree_default(self):
         """test if the default output_format of print_tree is ascii"""
@@ -96,24 +106,18 @@ class TestCli(unittest.TestCase):
                 )
             # else: we're only testing the heads and their children
             # (not the childs of childs)
-        for i in range(len(self.heads)):
+        for i, layer in enumerate(self.heads):
             self.assertEqual(
                 text_heads[i].identifier,
-                self.heads[i].identifier[:12]
+                layer.identifier[:12]
             )
-            self.assertEqual(text_heads[i].tags, self.heads[i].tags)
+            self.assertListEqual(text_heads[i].tags, layer.tags)
             self.assertEqual(
                 _convert_size(text_heads[i].size),
-                _convert_size(self.heads[i].size)
+                _convert_size(layer.size)
             )
             self.assertEqual(
                 len(text_heads[i].children),
-                len(self.heads[i].children)
+                len(layer.children)
             )
-            if self.heads[i].parent:
-                self.assertEqual(
-                    text_heads[i].parent.identifier,
-                    self.heads[i].parent.identifier
-                )
-            else:
-                self.assertIsNone(text_heads[i].parent)
+            self.assertTrue(text_heads[i].is_head())

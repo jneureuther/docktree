@@ -55,14 +55,14 @@ class TestImageLayer(unittest.TestCase):
         identifier = generate_valid_identifier()
         tags = [generate_tag() for _ in range(random.randint(0, 50))]
         layer = ImageLayer(identifier, tags=tags)
-        self.assertEqual(layer.tags, tags)
+        self.assertListEqual(layer.tags, tags)
         newtag = generate_tag()
         tags += newtag
         layer.tags.append(tags)
-        self.assertEqual(layer.tags, tags)
+        self.assertListEqual(layer.tags, tags)
         tags = [generate_tag() for _ in range(2)]
         layer.tags = tags
-        self.assertEqual(layer.tags, tags)
+        self.assertListEqual(layer.tags, tags)
 
     def test_size_prop(self):
         """test the tags property"""
@@ -234,14 +234,14 @@ class TestImageLayer(unittest.TestCase):
         dict_child = dict(layer_child)
         self.assertEqual(dict_parent['Id'], layer_parent.identifier)
         self.assertEqual(dict_parent['ParentId'], '')
-        self.assertEqual(dict_parent['RepoTags'], layer_parent.tags)
+        self.assertListEqual(dict_parent['RepoTags'], layer_parent.tags)
         self.assertEqual(dict_parent['VirtualSize'], layer_parent.size)
-        self.assertEqual(dict_parent['Children'], [dict(layer_child)])
+        self.assertListEqual(dict_parent['Children'], [dict(layer_child)])
         self.assertEqual(dict_child['Id'], layer_child.identifier)
         self.assertEqual(dict_child['ParentId'], layer_parent.identifier)
-        self.assertEqual(dict_child['RepoTags'], layer_child.tags)
+        self.assertListEqual(dict_child['RepoTags'], layer_child.tags)
         self.assertEqual(dict_child['VirtualSize'], layer_child.size)
-        self.assertEqual(dict_child['Children'], [])
+        self.assertListEqual(dict_child['Children'], [])
 
     def test_convert_size(self):
         """test the size to human conversation"""
