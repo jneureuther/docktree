@@ -10,7 +10,7 @@ install:
   - ./setup.py install
   - pip install -q codecov coveralls
 script:
-  - coverage run tests/all_tests.py
+  - coverage run --source=docktree,bin setup.py test
 after_success:
   - codecov
   - coveralls
