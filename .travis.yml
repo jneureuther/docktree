@@ -8,9 +8,8 @@ python:
   - "nightly"
 install:
   - ./setup.py install
-  - pip install -q codecov coveralls
+  - pip install -q coveralls
 script:
   - coverage run --source=docktree,bin setup.py test
 after_success:
-  - codecov
   - coveralls
