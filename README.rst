@@ -2,8 +2,8 @@ docktree
 ========
 
 .. image:: https://www.quantifiedcode.com/api/v1/project/32fe64b69f144531a2ed7c908aca46a8/badge.svg
-  :target: https://www.quantifiedcode.com/app/project/32fe64b69f144531a2ed7c908aca46a8
-  :alt: Code issues
+    :target: https://www.quantifiedcode.com/app/project/32fe64b69f144531a2ed7c908aca46a8
+    :alt: Code issues
 
 .. image:: https://landscape.io/github/jneureuther/docktree/develop/landscape.svg?style=flat
     :target: https://landscape.io/github/jneureuther/docktree/develop
