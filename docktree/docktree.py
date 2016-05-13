@@ -70,15 +70,13 @@ def get_heads(layers, for_image=None):
     heads = []
 
     for layer_id, layer in layers.items():
-        if not layer_name_search:
-            if not layer_id_search in layer_id:
+        if not layer_name_search and not layer_id_search in layer_id:
                 continue
-        else:
-            if not layer_name_search in layer.tags:
+        elif not layer_name_search in layer.tags:
                 continue
 
         next_parent = layer.parent
-        if next_parent == None:
+        if next_parent is None:
             heads.append(layer)
             continue
         while not next_parent.is_head():
