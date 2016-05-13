@@ -70,8 +70,8 @@ def get_heads(layers, for_image=None):
     heads = []
 
     for layer_id, layer in layers.items():
-        if not layer_name_search and not layer_id_search in layer_id or \
-        not layer_id_search and not layer_name_search in layer.tags:
+        if not layer_name_search and layer_id_search not in layer_id or \
+        not layer_id_search and layer_name_search not in layer.tags:
             continue
 
         next_parent = layer.parent
