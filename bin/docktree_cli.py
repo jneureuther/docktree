@@ -59,6 +59,14 @@ def parse_args(argv=sys.argv[1:]):
         help='the output format'
     )
 
+    parser.add_argument(
+        'images',
+        nargs='*',
+        default='all',
+        help='image(s) to print, either specified by [repository]:[tag] '
+             'or by the (abbreviated) image id'
+    )
+
     if 'argcomplete' in globals().keys():
         argcomplete.autocomplete(parser)
 
@@ -70,11 +78,22 @@ def main():
     parse arguments and run the desired action
     """
     args = parse_args()
-
     layers = docktree.analyze_layers()
+    heads = []
+
     if not args.print_intermediate:
         layers = docktree.remove_untagged_layers(layers)
-    heads = docktree.get_heads(layers)
+
+    if args.images == 'all':
+        heads = docktree.get_heads(layers)
+    else:
+        for image in args.images:
+            heads_for_image = docktree.get_heads(layers, image)
+            if not heads_for_image:
+                print("No image found with id/name {0}.".format(image))
+                sys.exit(1)
+            heads += heads_for_image
+
     print(print_tree(heads, output_format=args.output_format))
 
 if __name__ == '__main__':
