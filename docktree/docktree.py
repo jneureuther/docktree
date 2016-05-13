@@ -47,14 +47,45 @@ def analyze_layers(images=None):
     return layers
 
 
-def get_heads(layers):
+def get_heads(layers, for_image=None):
     """
-    return heads of a given tree
-    :param layers: double linked list
-    :return: heads of the tree
+    return the head(s) of the specified image or all heads of a given tree
+    :param layers: double linked list of layers
+    :param for_image: image to get heads for
+    :return: heads of the specified image or all heads of a given tree
     :rtype: list
     """
-    return [layer for layer in layers.values() if layer.is_head()]
+    if not for_image:
+        return [layer for layer in layers.values() if layer.is_head()]
+
+    if ':' in for_image:
+        # search for a tag
+        layer_name_search = for_image
+        layer_id_search = None
+    else:
+        # search for a id
+        layer_id_search = for_image
+        layer_name_search = None
+
+    heads = []
+
+    for layer_id, layer in layers.items():
+        if not layer_name_search:
+            if not layer_id_search in layer_id:
+                continue
+        else:
+            if not layer_name_search in layer.tags:
+                continue
+
+        next_parent = layer.parent
+        if next_parent == None:
+            heads.append(layer)
+            continue
+        while not next_parent.is_head():
+            next_parent = next_parent.parent
+        heads.append(next_parent)
+
+    return heads
 
 
 def remove_untagged_layers(layers):
