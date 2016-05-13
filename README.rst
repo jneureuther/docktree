@@ -15,6 +15,10 @@ docktree
 .. image:: https://travis-ci.org/jneureuther/docktree.svg?branch=develop
     :target: https://travis-ci.org/jneureuther/docktree
 
+.. image:: https://readthedocs.org/projects/docktree/badge/?version=latest
+    :target: http://docktree.readthedocs.org/en/latest/?badge=latest
+    :alt: Documentation Status
+
 Analyse dependencies of docker images.
 
 .. code::
@@ -26,6 +30,8 @@ Analyse dependencies of docker images.
 
 Usage
 -----
+
+You can find the latest documentation on https://docktree.rtfd.org/.
 
 command-line
 ~~~~~~~~~~~~
