@@ -46,12 +46,12 @@ def _print_tree_wrap(layer, indentation='', encoding='ascii'):
 
     if layer.parent is None:
         if encoding in 'utf-8':
-            new_node += '\u2500 {lay}\n'.format(lay=str(layer))
+            new_node += u'\u2500 {lay}\n'.format(lay=str(layer))
         else:
             new_node += '- {lay}\n'.format(lay=str(layer))
     elif layer.parent.children:
         if encoding in 'utf-8':
-            new_node += '{ind}\u2514\u2500 {lay}\n' \
+            new_node += u'{ind}\u2514\u2500 {lay}\n' \
             .format(ind=indentation, lay=str(layer))
         else:
             new_node += '{ind}|- {lay}\n' \

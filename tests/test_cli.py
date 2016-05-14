@@ -134,7 +134,7 @@ class TestCli(unittest.TestCase):
             encoding='utf-8'
         )
         line_regex = re.compile(
-            r"(?P<indent> {0,}\u2514?\u2500 )"
+            u"(?P<indent> {0,}\u2514?\u2500 )"
             r"(?P<id>[0-9a-f]{12})"
             r" Tags: (?P<tags>\[(\'[a-zA-Z0-9:\./]{1,}\'(, )?){0,}\])"
             r" Size: (?P<size>\d{1,}(\.\d)? ([KMGT]i)?B)",
