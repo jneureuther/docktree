@@ -157,9 +157,9 @@ class TestCli(unittest.TestCase):
                 tags=tags,
                 size=size,
             )
-            if indent == '─ ':
+            if indent == u'\u2500 ':
                 text_heads.append(layer)
-            elif indent == '  └─ ':
+            elif indent == u'  \u2514\u2500 ':
                 ImageLayer.join_parent_child(
                     parent=text_heads[-1],
                     child=layer,
