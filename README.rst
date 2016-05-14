@@ -89,4 +89,5 @@ Provide unittests_ whenever you can.
 License
 -------
 
-Attribution-ShareAlike 4.0 International
+`Creative Commons Attribution-ShareAlike 4.0
+<LICENSE>`_
