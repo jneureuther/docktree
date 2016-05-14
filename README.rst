@@ -9,8 +9,8 @@ docktree
     :target: https://landscape.io/github/jneureuther/docktree/develop
     :alt: Code Health
 
-.. image:: https://codecov.io/github/jneureuther/docktree/coverage.svg?branch=develop
-    :target: https://codecov.io/github/jneureuther/docktree?branch=develop
+.. image:: https://coveralls.io/repos/github/jneureuther/docktree/badge.svg
+    :target: https://coveralls.io/github/jneureuther/docktree?branch=feature-coveralls
 
 .. image:: https://travis-ci.org/jneureuther/docktree.svg?branch=develop
     :target: https://travis-ci.org/jneureuther/docktree
