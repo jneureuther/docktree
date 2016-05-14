@@ -10,7 +10,7 @@ docktree
     :alt: Code Health
 
 .. image:: https://coveralls.io/repos/github/jneureuther/docktree/badge.svg
-    :target: https://coveralls.io/github/jneureuther/docktree?branch=feature-coveralls
+    :target: https://coveralls.io/github/jneureuther/docktree
 
 .. image:: https://travis-ci.org/jneureuther/docktree.svg?branch=develop
     :target: https://travis-ci.org/jneureuther/docktree
