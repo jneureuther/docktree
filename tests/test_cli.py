@@ -66,16 +66,16 @@ class TestCli(unittest.TestCase):
             self.assertDictEqual(json_heads[i], dict(layer))
 
     def test_print_tree_default(self):
-        """test if the default output_format of print_tree is plain"""
-        text = cli.print_tree(self.heads, output_format='plain')
+        """test if the default output_format of print_tree is text"""
+        text = cli.print_tree(self.heads, output_format='text')
         text_default = cli.print_tree(self.heads)
         self.assertEqual(text, text_default)
 
-    def test_print_tree_plain_ascii(self):
-        """test the print_tree function with plain as output_format and ascii"""
+    def test_print_tree_text_ascii(self):
+        """test the print_tree function with text as output_format and ascii"""
         text = cli.print_tree(
             self.heads,
-            output_format='plain',
+            output_format='text',
             encoding='ascii'
         )
         line_regex = re.compile(
@@ -132,11 +132,11 @@ class TestCli(unittest.TestCase):
             )
             self.assertTrue(text_heads[i].is_head())
 
-    def test_print_tree_plain_utf8(self):
-        """test the print_tree function with plain as output_format and utf-8"""
+    def test_print_tree_text_utf8(self):
+        """test the print_tree function with text as output_format and utf-8"""
         text = cli.print_tree(
             self.heads,
-            output_format='plain',
+            output_format='text',
             encoding='utf-8'
         )
         line_regex = re.compile(
