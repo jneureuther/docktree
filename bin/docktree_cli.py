@@ -26,10 +26,17 @@ def print_tree(heads, output_format='plain', encoding='ascii'):
     """
     if output_format == 'plain':
         out = ''
-        headstr = u'\u2500' if encoding == 'utf-8' else '-'
-        chldstr = u'\u2514\u2500' if encoding == 'utf-8' else '|-'
+        chars = {
+            'headstr': '───' if encoding == 'utf-8' else '--',
+            'chldstr': '├──' if encoding == 'utf-8' else '|-',
+            'laststr': '└──' if encoding == 'utf-8' else '`-',
+            'indtstr': '│   ' if encoding == 'utf-8' else '|   ',
+            'lastindtstr': '    ' if encoding == 'utf-8' else '    ',
+        }
         for head in heads:
-            out += _print_tree_wrap(head, headstr=headstr, chldstr=chldstr)
+            out += _print_tree_wrap(head, indentation='', chars=chars)
+        out += "\n{0} heads, {1} layers".format(
+            len(heads), len(out.splitlines()))
         return out
     elif output_format == 'json':
         return json.dumps([dict(layer) for layer in heads])
@@ -37,29 +44,30 @@ def print_tree(heads, output_format='plain', encoding='ascii'):
         raise ValueError("invalid output_format '{0}'".format(output_format))
 
 
-def _print_tree_wrap(layer, indentation='', headstr='-', chldstr='|-'):
+def _print_tree_wrap(layer, indentation, chars):
     """
     wrapper function for recursive implementation of print tree
     :param indentation: indentation for the current layer
-    :param headstr: the string to be used in front of heads
-    :param chldstr: the string to be used in front of childs
+    :param chars: characters that are used for formatting the lines
     :return: the text output
     :rtype: str
     """
     new_node = ''
 
-    if layer.parent is None:
+    is_last = layer.is_head() or layer == layer.parent.children[-1]
+    if layer.is_head():
         new_node += u'{headstr} {lay}\n'.format(
-            headstr=headstr, lay=str(layer))
-    elif layer.parent.children:
+            headstr=chars['headstr'], lay=str(layer))
+    else:
+        chldstr = chars['laststr'] if is_last else chars['chldstr']
         new_node += u'{ind}{chldstr} {lay}\n'.format(
             ind=indentation, chldstr=chldstr, lay=str(layer))
     for child in layer.children:
+        indtstr = chars['lastindtstr'] if is_last else chars['indtstr']
         new_node += _print_tree_wrap(
             layer=child,
-            indentation=indentation + '  ',
-            headstr=headstr,
-            chldstr=chldstr,
+            indentation=indentation + indtstr,
+            chars=chars,
         )
     return new_node
 
