@@ -86,9 +86,9 @@ If you have docker installed on your local machine you could also work in a
 .. code:: bash
 
   pip3 install virtualenv
-  virtualenv venv
-  source venv/bin/activate
-  python3 setup.py develop
+  virtualenv .env
+  source .env/bin/activate
+  ./setup.py develop
 
 .. _`virtual environment`: http://docs.python-guide.org/en/latest/dev/virtualenvs/
 
@@ -103,7 +103,7 @@ Provide unittests_ whenever you can.
 
 .. code:: bash
 
-  python3 setup.py test
+  ./setup.py test
   # or
   coverage3 run setup.py test && coverage3 html
   # in order to generate a code coverage report
