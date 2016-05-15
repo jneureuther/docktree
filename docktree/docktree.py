@@ -58,20 +58,11 @@ def get_heads(layers, for_image=None):
     if not for_image:
         return [layer for layer in layers.values() if layer.is_head()]
 
-    if ':' in for_image:
-        # search for a tag
-        layer_name_search = for_image
-        layer_id_search = None
-    else:
-        # search for a id
-        layer_id_search = for_image
-        layer_name_search = None
-
     heads = []
 
     for layer_id, layer in layers.items():
-        if not layer_name_search and layer_id_search not in layer_id or \
-        not layer_id_search and layer_name_search not in layer.tags:
+        if not layer_id.startswith(for_image) and \
+                not [t for t in layer.tags if t.startswith(for_image)]:
             continue
 
         next_parent = layer.parent
