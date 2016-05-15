@@ -8,6 +8,7 @@ cli for docktree module
 
 from __future__ import print_function
 import docktree
+import docker
 import sys
 import json
 import argparse
@@ -31,6 +32,19 @@ def print_tree(heads, output_format='ascii'):
         return json.dumps([dict(layer) for layer in heads])
     else:
         raise ValueError("invalid output_format '{0}'".format(output_format))
+
+
+def image_completer(prefix, **kwargs):
+    """tab completion docker images"""
+    docker_cli = docker.Client()
+    images = docker_cli.images()
+    suggestions = set()
+    for img in images:
+        suggestions.update(img['RepoTags'] + [img['Id'][:12]])
+    return (
+        i for i in suggestions
+        if i.startswith(prefix) and not i == '<none>:<none>'
+    )
 
 
 def parse_args(argv=sys.argv[1:]):
@@ -65,7 +79,7 @@ def parse_args(argv=sys.argv[1:]):
         default='all',
         help='image(s) to print, either specified by [repository]:[tag] '
              'or by the (abbreviated) image id'
-    )
+    ).completer = image_completer
 
     if 'argcomplete' in globals().keys():
         argcomplete.autocomplete(parser)
