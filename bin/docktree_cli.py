@@ -17,15 +17,15 @@ except ImportError:
     pass
 
 
-def print_tree(heads, output_format='plain', encoding='ascii'):
+def print_tree(heads, output_format='text', encoding='ascii'):
     """
     print a tree starting at heads to stdout
     :param heads: heads of the tree
-    :param output_format: format of the printed tree, either plain or json
+    :param output_format: format of the printed tree, either text or json
     :param encoding: the terminal encoding (ascii or utf-8)
     """
     encoding = encoding.upper()
-    if output_format == 'plain':
+    if output_format == 'text':
         out = ''
         chars = {
             'headstr': u'───' if encoding == 'UTF-8' else '--',
@@ -94,8 +94,8 @@ def parse_args(argv=sys.argv[1:]):
         '-f',
         '--format',
         dest='output_format',
-        choices=('plain', 'json'),
-        default='plain',
+        choices=('text', 'json'),
+        default='text',
         help='the output format'
     )
     parser.add_argument(
