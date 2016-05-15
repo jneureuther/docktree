@@ -5,41 +5,18 @@
 import unittest
 import sys
 import os
-import random
 import json
 import re
 
 sys.path.insert(0, os.path.abspath('.'))
 
-from tests.test_image_layer import generate_valid_identifier, generate_tag
+from tests.helper import generate_random_api_layer
+from tests.helper import generate_random_layer
+from tests.helper import connect_layers_random
+
 from bin import docktree_cli as cli
 from docktree.ImageLayer import ImageLayer
 from docktree.ImageLayer import _convert_size
-
-
-def generate_random_layer(max_tag_count=2):
-    """
-    :return: a layer with random tags and id
-    :param max_tag_count: the maximum count of tags the layer should have
-    """
-    return ImageLayer(
-        identifier=generate_valid_identifier(),
-        tags=[generate_tag() for _ in range(random.randint(0, max_tag_count))],
-        size=random.randint(0, 1024*1024*1024)
-    )
-
-
-def connect_layers_random(layers_list):
-    """
-    connects some layers in list layers_list randomly to a tree
-    by using join_parent_child
-    :param layers_list: a list of ImageLayer instances
-    """
-    for i, layer in enumerate(layers_list[:-1]):
-        ImageLayer.join_parent_child(
-            parent=random.choice(layers_list[i+1:]),
-            child=layer
-        )
 
 
 class TestCli(unittest.TestCase):
@@ -51,6 +28,25 @@ class TestCli(unittest.TestCase):
         # connect parent and child
         connect_layers_random(self.layers)
         self.heads = [layer for layer in self.layers if layer.parent is None]
+
+    def test_image_completer(self):
+        """test the argcompletion for docker images"""
+        api_list = [generate_random_api_layer() for _ in range(15)]
+        suggestions = cli.image_completer('', docker_images=api_list)
+        self.assertIn(api_list[0]['Id'][:12], suggestions)
+        api_image_tag = None
+        for api_image in api_list:
+            if api_image['RepoTags']:
+                api_image_tag = api_image['RepoTags'][0]
+        if not api_image_tag:
+            return
+        self.assertIn(api_image_tag, suggestions)
+        suggestions = cli.image_completer(api_image_tag[0],
+                                          docker_images=api_list)
+        self.assertIn(api_image_tag, suggestions)
+        suggestions = cli.image_completer(api_image_tag,
+                                          docker_images=api_list)
+        self.assertIn(api_image_tag, suggestions)
 
     def test_print_tree_invalid(self):
         """test the print_tree function with an invalid output_format"""

@@ -36,8 +36,11 @@ def print_tree(heads, output_format='ascii'):
 
 def image_completer(prefix, **kwargs):
     """tab completion docker images"""
-    docker_cli = docker.Client()
-    images = docker_cli.images()
+    if 'docker_images' not in kwargs.keys():
+        docker_cli = docker.Client()
+        images = docker_cli.images()
+    else:
+        images = kwargs['docker_images']
     suggestions = set()
     for img in images:
         suggestions.update(img['RepoTags'] + [img['Id'][:12]])

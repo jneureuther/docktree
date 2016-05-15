@@ -3,40 +3,19 @@
 """Test the docktree.docktree module"""
 
 import unittest
+import random
 import os
 import sys
-import random
 from copy import deepcopy
 
 sys.path.insert(0, os.path.abspath('.'))
 
-from tests.test_cli import generate_random_layer, connect_layers_random
-from tests.test_image_layer import generate_valid_identifier, generate_tag
+from tests.helper import generate_random_api_layer
+from tests.helper import generate_random_layer
+from tests.helper import connect_layers_random
 
 from docktree import docktree
 from docktree.ImageLayer import ImageLayer
-
-
-def generate_random_api_layer(max_tag_count=2):
-    """
-    :return: a dict containing a layer like it's provided by docker api
-    :param max_tag_count: the maximum count of tags the layer should have
-    """
-    repo_digests = []
-    tags = [generate_tag() for _ in range(random.randint(0, max_tag_count))]
-    if not tags:
-        tags.append('<none>:<none>')
-        repo_digests.append('<none>@<none>')
-    return {
-        'Created': random.randint(0, 3000000000),
-        'Id': generate_valid_identifier(),
-        'ParentId': '',
-        'Labels': {},
-        'RepoTags': tags,
-        'RepoDigests': repo_digests,
-        'Size': 0,
-        'VirtualSize': random.randint(0, 1024*1024*1024*1024),
-    }
 
 
 class TestDocktree(unittest.TestCase):
@@ -54,7 +33,7 @@ class TestDocktree(unittest.TestCase):
         self.heads = [lay for lay in self.layers.values() if lay.is_head()]
         self.static_layers = {
             'ezue4PoF7Im1zae2kie9uokua3ze3dae8ode9edooPhah7Eifaekae' +
-            'F9aith1EeX' :
+            'F9aith1EeX':
             ImageLayer(
                 identifier='ezue4PoF7Im1zae2kie9uokua3ze3dae8ode9ed' +
                 'ooPhah7EifaekaeF9aith1EeX',
@@ -62,7 +41,7 @@ class TestDocktree(unittest.TestCase):
                 size=1
             ),
             'xielael0biezoreire7ieth9teeKohphoh2Cheew8uoreeYoosa1ja' +
-            'tha2eejeic' :
+            'tha2eejeic':
             ImageLayer(
                 identifier='xielael0biezoreire7ieth9teeKohphoh2Chee' +
                 'w8uoreeYoosa1jatha2eejeic',
@@ -70,7 +49,7 @@ class TestDocktree(unittest.TestCase):
                 size=2
             ),
             'zoomee1eiNgieF8ees0Eemieruaneeyee9so5na8ahdo0chaizahth' +
-            'ahph7eekub' :
+            'ahph7eekub':
             ImageLayer(
                 identifier='zoomee1eiNgieF8ees0Eemieruaneeyee9so5na' +
                 '8ahdo0chaizahthahph7eekub',
@@ -80,15 +59,15 @@ class TestDocktree(unittest.TestCase):
         }
         self.static_layers['ezue4PoF7Im1zae2kie9uokua3ze3dae8ode9ed' +
                            'ooPhah7EifaekaeF9aith1EeX'].parent = \
-        self.static_layers['xielael0biezoreire7ieth9teeKohphoh2Chee' +
-                           'w8uoreeYoosa1jatha2eejeic']
+            self.static_layers['xielael0biezoreire7ieth9teeKohphoh2Chee' +
+                               'w8uoreeYoosa1jatha2eejeic']
         self.static_layers['xielael0biezoreire7ieth9teeKohphoh2Chee' +
                            'w8uoreeYoosa1jatha2eejeic'].parent = \
-        self.static_layers['zoomee1eiNgieF8ees0Eemieruaneeyee9so5na' +
-                           '8ahdo0chaizahthahph7eekub']
+            self.static_layers['zoomee1eiNgieF8ees0Eemieruaneeyee9so5na' +
+                               '8ahdo0chaizahthahph7eekub']
         self.static_heads = [
-            self.static_layers['zoomee1eiNgieF8ees0Eemieruaneeyee9so5na8ahdo0cha' +
-                          'izahthahph7eekub']
+            self.static_layers['zoomee1eiNgieF8ees0Eemieruaneeyee9so5na' +
+                               '8ahdo0chaizahthahph7eekub']
         ]
 
     def test_analyze_layers(self):
