@@ -22,6 +22,7 @@ def print_tree(heads, output_format='plain', encoding='ascii'):
     print a tree starting at heads to stdout
     :param heads: heads of the tree
     :param output_format: format of the printed tree, either plain or json
+    :param encoding: the terminal encoding (ascii or utf-8)
     """
     if output_format == 'plain':
         out = ''
