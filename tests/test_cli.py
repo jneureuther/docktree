@@ -32,20 +32,22 @@ class TestCli(unittest.TestCase):
     def test_image_completer(self):
         """test the argcompletion for docker images"""
         api_list = [generate_random_api_layer() for _ in range(15)]
-        suggestions = cli.image_completer('', docker_images=api_list)
+        suggestions = list(cli.image_completer('', docker_images=api_list))
         self.assertIn(api_list[0]['Id'][:12], suggestions)
         api_image_tag = None
         for api_image in api_list:
-            if api_image['RepoTags']:
+            if api_image['RepoTags'] and \
+                    api_image['RepoTags'][0] != '<none>:<none>':
                 api_image_tag = api_image['RepoTags'][0]
+                break
         if not api_image_tag:
             return
         self.assertIn(api_image_tag, suggestions)
-        suggestions = cli.image_completer(api_image_tag[0],
-                                          docker_images=api_list)
+        suggestions = list(cli.image_completer(api_image_tag[0],
+                                               docker_images=api_list))
         self.assertIn(api_image_tag, suggestions)
-        suggestions = cli.image_completer(api_image_tag,
-                                          docker_images=api_list)
+        suggestions = list(cli.image_completer(api_image_tag,
+                                               docker_images=api_list))
         self.assertIn(api_image_tag, suggestions)
 
     def test_print_tree_invalid(self):
