@@ -97,6 +97,14 @@ def parse_args(argv=sys.argv[1:]):
         default='plain',
         help='the output format'
     )
+    parser.add_argument(
+        '-e',
+        '--encoding',
+        dest='output_encoding',
+        choices=('ascii', 'utf-8'),
+        default=None,
+        help='the output encoding'
+    )
 
     if 'argcomplete' in globals().keys():
         argcomplete.autocomplete(parser)
@@ -115,7 +123,7 @@ def main():
         layers = docktree.remove_untagged_layers(layers)
     heads = docktree.get_heads(layers)
 
-    encoding = sys.getdefaultencoding()
+    encoding = args.output_encoding or sys.getdefaultencoding()
     print(print_tree(heads, output_format=args.output_format, encoding=encoding))
 
 if __name__ == '__main__':
