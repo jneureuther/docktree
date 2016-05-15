@@ -102,7 +102,7 @@ def parse_args(argv=sys.argv[1:]):
         '--encoding',
         dest='output_encoding',
         choices=('ascii', 'utf-8'),
-        default=None,
+        default=sys.getdefaultencoding(),
         help='the output encoding'
     )
 
@@ -123,8 +123,9 @@ def main():
         layers = docktree.remove_untagged_layers(layers)
     heads = docktree.get_heads(layers)
 
-    encoding = args.output_encoding or sys.getdefaultencoding()
-    print(print_tree(heads, output_format=args.output_format, encoding=encoding))
+    print(print_tree(
+        heads, output_format=args.output_format, encoding=args.output_encoding
+    ))
 
 if __name__ == '__main__':
     main()
