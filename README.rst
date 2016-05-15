@@ -59,6 +59,12 @@ module
 Contributing
 ------------
 
+You are very welcome to contribute to this project either by a pull request or
+by filing an issue/feature-request!
+
+Vagrant
+~~~~~~~
+
 | If you have Vagrant_ installed, just run ``vagrant up`` in order
 | to spin up a virtual machine containing everything needed for development.
 | Docktree will be installed system-wide and a set of example data is generated.
@@ -71,6 +77,21 @@ Contributing
 
 .. _Vagrant: https://www.vagrantup.com/
 
+Virtual Environment
+~~~~~~~~~~~~~~~~~~~
+
+If you have docker installed on your local machine you could also work in a
+`virtual environment`_:
+
+.. code:: bash
+
+  pip3 install virtualenv
+  virtualenv venv
+  source venv/bin/activate
+  python3 setup.py develop
+
+.. _`virtual environment`: http://docs.python-guide.org/en/latest/dev/virtualenvs/
+
 unittests
 ~~~~~~~~~
 
@@ -82,9 +103,10 @@ Provide unittests_ whenever you can.
 
 .. code:: bash
 
-  ./setup.py test
+  python3 setup.py test
   # or
-  coverage run tests/all_tests.py
+  coverage3 run setup.py test && coverage3 html
+  # in order to generate a code coverage report
 
 License
 -------
