@@ -24,7 +24,7 @@ def generate_valid_identifier():
 
 def generate_tag():
     """:return a random but valid tag for image layers"""
-    allowed_tag_chars = string.ascii_letters + string.digits
+    allowed_tag_chars = string.ascii_letters + string.digits + "_:"
     return ''.join(
         (random.choice(allowed_tag_chars) for _ in range(
             random.randint(1, 100)

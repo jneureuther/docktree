@@ -79,13 +79,13 @@ class TestCli(unittest.TestCase):
             encoding='ascii'
         )
         line_regex = re.compile(
-            r"(?P<indent> {0,}\|?- )"
+            r"(?P<indent>([\| ]  ){0,}[\|`-]- )"
             r"(?P<id>[0-9a-f]{12})"
-            r" Tags: (?P<tags>\[(\'[a-zA-Z0-9:\./]{1,}\'(, )?){0,}\])"
+            r" Tags: (?P<tags>\[(\'[a-zA-Z0-9_:\./]{1,}\'(, )?){0,}\])"
             r" Size: (?P<size>\d{1,}(\.\d)? ([KMGT]i)?B)"
         )
         text_heads = []
-        for line in text.splitlines():
+        for line in text.splitlines()[:-2]:
             matches = line_regex.match(line)
             self.assertIsNotNone(matches)
             indent = matches.group('indent')
@@ -101,15 +101,21 @@ class TestCli(unittest.TestCase):
                 tags=tags,
                 size=size,
             )
-            if indent == '- ':
+            if indent == '-- ':
                 text_heads.append(layer)
-            elif indent == '  |- ':
+            elif indent in ['   |- ', '   `- ']:
                 ImageLayer.join_parent_child(
                     parent=text_heads[-1],
                     child=layer,
                 )
             # else: we're only testing the heads and their children
             # (not the childs of childs)
+        # check last 2 lines
+        self.assertEqual("", text.splitlines()[-2])
+        self.assertEqual("{h} heads, {n} layers".format(
+            h=len(self.heads), n=len(self.layers)
+        ), text.splitlines()[-1])
+        self.assertEqual(len(self.heads), len(text_heads))
         for i, layer in enumerate(self.heads):
             self.assertEqual(
                 text_heads[i].identifier,
@@ -134,14 +140,14 @@ class TestCli(unittest.TestCase):
             encoding='utf-8'
         )
         line_regex = re.compile(
-            u"(?P<indent> {0,}\u2514?\u2500 )"
+            u"(?P<indent>([│ ]   ){0,}[─├└]── )"
             r"(?P<id>[0-9a-f]{12})"
-            r" Tags: (?P<tags>\[(\'[a-zA-Z0-9:\./]{1,}\'(, )?){0,}\])"
+            r" Tags: (?P<tags>\[(\'[a-zA-Z0-9_:\./]{1,}\'(, )?){0,}\])"
             r" Size: (?P<size>\d{1,}(\.\d)? ([KMGT]i)?B)",
             re.UNICODE
         )
         text_heads = []
-        for line in text.splitlines():
+        for line in text.splitlines()[:-2]:
             matches = line_regex.match(line)
             self.assertIsNotNone(matches)
             indent = matches.group('indent')
@@ -157,15 +163,21 @@ class TestCli(unittest.TestCase):
                 tags=tags,
                 size=size,
             )
-            if indent == u'\u2500 ':
+            if indent == u'─── ':
                 text_heads.append(layer)
-            elif indent == u'  \u2514\u2500 ':
+            elif indent in [u'    ├── ', u'    └── ']:
                 ImageLayer.join_parent_child(
                     parent=text_heads[-1],
                     child=layer,
                 )
             # else: we're only testing the heads and their children
             # (not the childs of childs)
+        # check last 2 lines
+        self.assertEqual("", text.splitlines()[-2])
+        self.assertEqual("{h} heads, {n} layers".format(
+            h=len(self.heads), n=len(self.layers)
+        ), text.splitlines()[-1])
+        self.assertEqual(len(self.heads), len(text_heads))
         for i, layer in enumerate(self.heads):
             self.assertEqual(
                 text_heads[i].identifier,
