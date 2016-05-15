@@ -24,14 +24,15 @@ def print_tree(heads, output_format='plain', encoding='ascii'):
     :param output_format: format of the printed tree, either plain or json
     :param encoding: the terminal encoding (ascii or utf-8)
     """
+    encoding = encoding.upper()
     if output_format == 'plain':
         out = ''
         chars = {
-            'headstr': '───' if encoding == 'utf-8' else '--',
-            'chldstr': '├──' if encoding == 'utf-8' else '|-',
-            'laststr': '└──' if encoding == 'utf-8' else '`-',
-            'indtstr': '│   ' if encoding == 'utf-8' else '|   ',
-            'lastindtstr': '    ' if encoding == 'utf-8' else '    ',
+            'headstr': u'───' if encoding == 'UTF-8' else '--',
+            'chldstr': u'├──' if encoding == 'UTF-8' else '|-',
+            'laststr': u'└──' if encoding == 'UTF-8' else '`-',
+            'indtstr': u'│   ' if encoding == 'UTF-8' else '|  ',
+            'lastindtstr': '    ' if encoding == 'UTF-8' else '   ',
         }
         for head in heads:
             out += _print_tree_wrap(head, indentation='', chars=chars)
@@ -102,7 +103,7 @@ def parse_args(argv=sys.argv[1:]):
         '--encoding',
         dest='output_encoding',
         choices=('ascii', 'utf-8'),
-        default=sys.getdefaultencoding(),
+        default=sys.stdout.encoding,
         help='the output encoding'
     )
 

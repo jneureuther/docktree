@@ -45,7 +45,7 @@ class TestCliArgParse(unittest.TestCase):
     def test_encoding(self):
         """test if all encodings are parsed correctly"""
         args = cli.parse_args([])
-        self.assertEqual(sys.getdefaultencoding(), args.output_encoding)
+        self.assertEqual(sys.stdout.encoding, args.output_encoding)
         args = cli.parse_args('-e ascii'.split(' '))
         self.assertEqual('ascii', args.output_encoding)
         args = cli.parse_args('--en ascii'.split(' '))
