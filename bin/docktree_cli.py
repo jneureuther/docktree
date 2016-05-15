@@ -26,8 +26,10 @@ def print_tree(heads, output_format='plain', encoding='ascii'):
     """
     if output_format == 'plain':
         out = ''
+        headstr = u'\u2500' if encoding == 'utf-8' else '-'
+        chldstr = u'\u2514\u2500' if encoding == 'utf-8' else '|-'
         for head in heads:
-            out += _print_tree_wrap(head, encoding=encoding)
+            out += _print_tree_wrap(head, headstr=headstr, chldstr=chldstr)
         return out
     elif output_format == 'json':
         return json.dumps([dict(layer) for layer in heads])
@@ -35,33 +37,30 @@ def print_tree(heads, output_format='plain', encoding='ascii'):
         raise ValueError("invalid output_format '{0}'".format(output_format))
 
 
-def _print_tree_wrap(layer, indentation='', encoding='ascii'):
+def _print_tree_wrap(layer, indentation='', headstr='-', chldstr='|-'):
     """
     wrapper function for recursive implementation of print tree
     :param indentation: indentation for the current layer
-    :param encoding: either ascii or utf-8
-    :return: the ascii output
+    :param headstr: the string to be used in front of heads
+    :param chldstr: the string to be used in front of childs
+    :return: the text output
     :rtype: str
     """
     new_node = ''
 
     if layer.parent is None:
-        if encoding in 'utf-8':
-            new_node += u'\u2500 {lay}\n'.format(lay=str(layer))
-        else:
-            new_node += '- {lay}\n'.format(lay=str(layer))
+        new_node += u'{headstr} {lay}\n'.format(
+            headstr=headstr, lay=str(layer))
     elif layer.parent.children:
-        if encoding in 'utf-8':
-            new_node += u'{ind}\u2514\u2500 {lay}\n' \
-            .format(ind=indentation, lay=str(layer))
-        else:
-            new_node += '{ind}|- {lay}\n' \
-            .format(ind=indentation, lay=str(layer))
+        new_node += u'{ind}{chldstr} {lay}\n'.format(
+            ind=indentation, chldstr=chldstr, lay=str(layer))
     for child in layer.children:
         new_node += _print_tree_wrap(
             layer=child,
             indentation=indentation + '  ',
-            encoding=encoding)
+            headstr=headstr,
+            chldstr=chldstr,
+        )
     return new_node
 
 
