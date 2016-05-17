@@ -3,33 +3,16 @@
 """Test the ImageLayer abstraction class"""
 
 import unittest
-import string
 import random
 import os
 import sys
 
 sys.path.insert(0, os.path.abspath('.'))
 
+from tests.helper import generate_valid_identifier, generate_tag
+
 from docktree.ImageLayer import ImageLayer
 from docktree.ImageLayer import _convert_size
-
-
-def generate_valid_identifier():
-    """:return a random but valid identifier for image layers"""
-    allowed_id_chars = list(set(string.hexdigits.lower()))
-    return ''.join(
-        (random.choice(allowed_id_chars) for _ in range(64))
-    )
-
-
-def generate_tag():
-    """:return a random but valid tag for image layers"""
-    allowed_tag_chars = string.ascii_letters + string.digits
-    return ''.join(
-        (random.choice(allowed_tag_chars) for _ in range(
-            random.randint(1, 100)
-        ))
-    )
 
 
 class TestImageLayer(unittest.TestCase):

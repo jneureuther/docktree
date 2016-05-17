@@ -38,9 +38,13 @@ command-line
 
 .. code:: bash
 
-  usage: docktree [-h] [-i] [-f {ascii,json}]
+  usage: docktree [-h] [-i] [-f {ascii,json}] [images [images ...]]
 
   cli for docktree module
+
+  positional arguments:
+    images                image(s) to print, either specified by
+                          [repository]:[tag] or by the (abbreviated) image id
 
   optional arguments:
     -h, --help            show this help message and exit
