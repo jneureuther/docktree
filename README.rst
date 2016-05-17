@@ -1,8 +1,8 @@
 dockgraph
 =========
 
-.. image:: https://www.quantifiedcode.com/api/v1/project/32fe64b69f144531a2ed7c908aca46a8/badge.svg
-    :target: https://www.quantifiedcode.com/app/project/32fe64b69f144531a2ed7c908aca46a8
+.. image:: https://www.quantifiedcode.com/api/v1/project/523dd250aef54e6bae0fc77050ee8414/badge.svg
+    :target: https://www.quantifiedcode.com/app/project/523dd250aef54e6bae0fc77050ee8414
     :alt: Code issues
 
 .. image:: https://landscape.io/github/jneureuther/dockgraph/develop/landscape.svg?style=flat
