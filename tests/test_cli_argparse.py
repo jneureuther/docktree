@@ -8,7 +8,7 @@ import os
 
 sys.path.insert(0, os.path.abspath('.'))
 
-from bin import docktree_cli as cli
+from bin import dockgraph_cli as cli
 
 
 class TestCliArgParse(unittest.TestCase):

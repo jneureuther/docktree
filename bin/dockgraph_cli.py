@@ -3,11 +3,11 @@
 # PYTHON_ARGCOMPLETE_OK
 
 """
-cli for docktree module
+cli for dockgraph module
 """
 
 from __future__ import print_function
-import docktree
+import dockgraph
 import docker
 import sys
 import json
@@ -143,17 +143,18 @@ def main():
     parse arguments and run the desired action
     """
     args = parse_args()
-    layers = docktree.analyze_layers()
+
+    layers = dockgraph.analyze_layers()
     heads = []
 
     if not args.print_intermediate:
-        layers = docktree.remove_untagged_layers(layers)
+        layers = dockgraph.remove_untagged_layers(layers)
 
     if args.images == 'all':
-        heads = docktree.get_heads(layers)
+        heads = dockgraph.get_heads(layers)
     else:
         for image in args.images:
-            heads_for_image = docktree.get_heads(layers, image)
+            heads_for_image = dockgraph.get_heads(layers, image)
             if not heads_for_image:
                 print("No image found with id/name {0}.".format(image))
                 sys.exit(1)

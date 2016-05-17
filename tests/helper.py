@@ -5,7 +5,7 @@
 import random
 import string
 
-from docktree.ImageLayer import ImageLayer
+from dockgraph.ImageLayer import ImageLayer
 
 
 def generate_valid_identifier():

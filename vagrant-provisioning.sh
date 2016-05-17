@@ -28,6 +28,6 @@ docker run --name baz bar touch baz
 docker commit baz baz
 docker rm baz
 
-echo -e "\n==== install docktree ===="
+echo -e "\n==== install dockgraph ===="
 cd /vagrant && python3 setup.py develop && cd -
 activate-global-python-argcomplete

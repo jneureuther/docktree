@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Test the docktree.docktree module"""
+"""Test the dockgraph.dockgraph module"""
 
 import unittest
 import random
@@ -14,12 +14,12 @@ from tests.helper import generate_random_api_layer
 from tests.helper import generate_random_layer
 from tests.helper import connect_layers_random
 
-from docktree import docktree
-from docktree.ImageLayer import ImageLayer
+from dockgraph import dockgraph
+from dockgraph.ImageLayer import ImageLayer
 
 
-class TestDocktree(unittest.TestCase):
-    """Test the docktree.docktree module"""
+class Testdockgraph(unittest.TestCase):
+    """Test the dockgraph.dockgraph module"""
 
     def setUp(self):
         """generate some ImageLayers"""
@@ -76,7 +76,7 @@ class TestDocktree(unittest.TestCase):
         # connect parent and child
         for i, api_layer in enumerate(api_list[:-1]):
             api_layer['ParentId'] = random.choice(api_list[i+1:])['Id']
-        analyzed_dict = docktree.analyze_layers(api_list)
+        analyzed_dict = dockgraph.analyze_layers(api_list)
         # check for consistency (key is identifier of value)
         for identifier, layer in analyzed_dict.items():
             self.assertEqual(layer.identifier, identifier)
@@ -110,28 +110,28 @@ class TestDocktree(unittest.TestCase):
 
     def test_get_all_heads(self):
         """test the get_heads method returns a list of heads"""
-        heads = docktree.get_heads(self.layers)
+        heads = dockgraph.get_heads(self.layers)
         self.assertListEqual(heads, self.heads)
         for layer in heads:
             self.assertTrue(layer.is_head())
 
     def test_get_heads_for_id(self):
         """test the get_heads function with a given id"""
-        heads = docktree.get_heads(self.static_layers, 'ezue4PoF7Im')
+        heads = dockgraph.get_heads(self.static_layers, 'ezue4PoF7Im')
         self.assertListEqual(heads, self.static_heads)
         for layer in heads:
             self.assertTrue(layer.is_head())
 
     def test_get_heads_for_name(self):
         """test the get_heads function with a given name"""
-        heads = docktree.get_heads(self.static_layers, 'foo1/bar:baz')
+        heads = dockgraph.get_heads(self.static_layers, 'foo1/bar:baz')
         self.assertListEqual(heads, self.static_heads)
         for layer in heads:
             self.assertTrue(layer.is_head())
 
     def test_get_heads_for_head(self):
         """test the get_heads function with a head element"""
-        heads = docktree.get_heads(self.static_layers, 'foo3/bar:baz')
+        heads = dockgraph.get_heads(self.static_layers, 'foo3/bar:baz')
         self.assertListEqual(heads, self.static_heads)
         for layer in heads:
             self.assertTrue(layer.is_head())
@@ -139,7 +139,7 @@ class TestDocktree(unittest.TestCase):
     def test_remove_untagged_layers(self):
         """test the remove_untagged_layers function"""
         test_layers = deepcopy(self.layers)
-        tagged_layers = docktree.remove_untagged_layers(test_layers)
+        tagged_layers = dockgraph.remove_untagged_layers(test_layers)
         # check for consistency (key is identifier of value)
         for identifier, layer in test_layers.items():
             self.assertEqual(layer.identifier, identifier)

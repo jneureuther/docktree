@@ -1,5 +1,5 @@
-docktree
-========
+dockgraph
+=========
 
 .. image:: https://www.quantifiedcode.com/api/v1/project/32fe64b69f144531a2ed7c908aca46a8/badge.svg
     :target: https://www.quantifiedcode.com/app/project/32fe64b69f144531a2ed7c908aca46a8
@@ -40,10 +40,10 @@ command-line
 
 .. code:: bash
 
-  usage: docktree [-h] [-i] [-f {text,json}] [-e {ascii,utf-8}]
+  usage: dockgraph [-h] [-i] [-f {text,json}] [-e {ascii,utf-8}]
                   [images [images ...]]
 
-  cli for docktree module
+  cli for dockgraph module
 
   positional arguments:
     images                image(s) to print, either specified by
@@ -62,8 +62,8 @@ module
 
 .. code:: python
 
-  import docktree
-  help(docktree.docktree)
+  import dockgraph
+  help(dockgraph.dockgraph)
 
 Contributing
 ------------
@@ -76,7 +76,7 @@ Vagrant
 
 | If you have Vagrant_ installed, just run ``vagrant up`` in order
 | to spin up a virtual machine containing everything needed for development.
-| Docktree will be installed system-wide and a set of example data is generated.
+| Dockgraph will be installed system-wide and a set of example data is generated.
 |
 | In order to automatically copy modified code into the vm run:
 
