@@ -5,18 +5,18 @@ dockgraph
     :target: https://www.quantifiedcode.com/app/project/32fe64b69f144531a2ed7c908aca46a8
     :alt: Code issues
 
-.. image:: https://landscape.io/github/jneureuther/docktree/develop/landscape.svg?style=flat
-    :target: https://landscape.io/github/jneureuther/docktree/develop
+.. image:: https://landscape.io/github/jneureuther/dockgraph/develop/landscape.svg?style=flat
+    :target: https://landscape.io/github/jneureuther/dockgraph/develop
     :alt: Code Health
 
-.. image:: https://coveralls.io/repos/github/jneureuther/docktree/badge.svg?branch=develop
-    :target: https://coveralls.io/github/jneureuther/docktree?branch=develop
+.. image:: https://coveralls.io/repos/github/jneureuther/dockgraph/badge.svg?branch=develop
+    :target: https://coveralls.io/github/jneureuther/dockgraph?branch=develop
 
-.. image:: https://travis-ci.org/jneureuther/docktree.svg?branch=develop
-    :target: https://travis-ci.org/jneureuther/docktree
+.. image:: https://travis-ci.org/jneureuther/dockgraph.svg?branch=develop
+    :target: https://travis-ci.org/jneureuther/dockgraph
 
-.. image:: https://readthedocs.org/projects/docktree/badge/?version=latest
-    :target: http://docktree.readthedocs.org/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/dockgraph/badge/?version=latest
+    :target: http://dockgraph.readthedocs.org/en/latest/?badge=latest
     :alt: Documentation Status
 
 Analyse dependencies of docker images.
@@ -33,7 +33,7 @@ Analyse dependencies of docker images.
 Usage
 -----
 
-You can find the latest documentation on https://docktree.rtfd.org/.
+You can find the latest documentation on https://dockgraph.rtfd.org/.
 
 command-line
 ~~~~~~~~~~~~
