@@ -23,10 +23,12 @@ Analyse dependencies of docker images.
 
 .. code::
 
-  - 65e4158d9625 Tags: ['docker.io/busybox:latest'] Size: 1.1 MiB
-     |- 8fa48410182e Tags: ['bar:latest'] Size: 1.1 MiB
-       |- 26cc8a5feb49 Tags: ['baz:latest'] Size: 1.1 MiB
-     |- 05710237af2f Tags: ['foo:latest'] Size: 1.1 MiB
+  ─── 307ac631f1b5 Tags: ['docker.io/busybox:latest'] Size: 1.1 MiB
+      ├── b6fd900f4d6a Tags: ['bar:latest'] Size: 1.1 MiB
+      │   └── 700decaa0660 Tags: ['baz:latest'] Size: 1.1 MiB
+      └── 5731cad94676 Tags: ['foo:latest'] Size: 1.1 MiB
+
+  1 heads, 4 layers
 
 Usage
 -----
@@ -38,7 +40,8 @@ command-line
 
 .. code:: bash
 
-  usage: docktree [-h] [-i] [-f {ascii,json}] [images [images ...]]
+  usage: docktree [-h] [-i] [-f {text,json}] [-e {ascii,utf-8}]
+                  [images [images ...]]
 
   cli for docktree module
 
@@ -49,8 +52,10 @@ command-line
   optional arguments:
     -h, --help            show this help message and exit
     -i, --intermediate    print intermediate (untagged) layers
-    -f {ascii,json}, --format {ascii,json}
+    -f {text,json}, --format {text,json}
                           the output format
+    -e {ascii,utf-8}, --encoding {ascii,utf-8}
+                          the output encoding
 
 module
 ~~~~~~

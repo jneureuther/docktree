@@ -239,31 +239,3 @@ class TestImageLayer(unittest.TestCase):
         self.assertEqual(_convert_size(1023*1024*1024*1024), '1023.0 GiB')
         self.assertEqual(_convert_size(1024*1024*1024*1024), '1.0 TiB')
         self.assertEqual(_convert_size(1023*1024*1024*1024*1024), '1023.0 TiB')
-
-    def test_print_tree(self):
-        """test the print_tree function"""
-        id_child = generate_valid_identifier()
-        size_child = 42*1024*1024*1024
-        layer_child = ImageLayer(
-            identifier=id_child,
-            tags=['child'],
-            size=size_child,
-        )
-        id_parent = generate_valid_identifier()
-        size_parent = 10*1024*1024
-        layer_parent = ImageLayer(
-            identifier=id_parent,
-            tags=['parent'],
-            size=size_parent,
-        )
-        ImageLayer.join_parent_child(parent=layer_parent, child=layer_child)
-        self.assertEqual(
-            layer_parent.print_tree(),
-            "- {id_head} Tags: ['parent'] Size: {size_head}\n"
-            "  |- {id_child} Tags: ['child'] Size: {size_child}\n".format(
-                id_head=id_parent[:12],
-                id_child=id_child[:12],
-                size_head=_convert_size(size_parent),
-                size_child=_convert_size(size_child),
-            )
-        )

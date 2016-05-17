@@ -44,22 +44,6 @@ class ImageLayer(object):
         yield('VirtualSize', self.size)
         yield('Children', [dict(child) for child in self.children])
 
-    def print_tree(self, indentation=''):
-        """
-        print a tree following the double-linked list
-        :param indentation: indentation for the current layer
-        :return: the ascii output
-        :rtype: str
-        """
-        output = ''
-        if self.parent is None:
-            output += '- {lay}\n'.format(lay=str(self))
-        elif self.parent.children:
-            output += '{ind}|- {lay}\n'.format(ind=indentation, lay=str(self))
-        for child in self._children:
-            output += child.print_tree(indentation + '  ')
-        return output
-
     @staticmethod
     def join_parent_child(parent, child):
         """add child to the parent's childs and set child.parent to parent"""
