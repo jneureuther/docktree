@@ -26,7 +26,7 @@ def get_requirements(filename="requirements.txt"):
 
 setup(
     name='dockgraph',
-    version='0.1',
+    version='1.0.0',
     # see https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         'Development Status :: 1 - Planning',
