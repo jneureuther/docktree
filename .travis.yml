@@ -10,6 +10,6 @@ install:
   - ./setup.py install
   - pip install -q coveralls
 script:
-  - coverage run --source=docktree,bin setup.py test
+  - coverage run --source=dockgraph,bin setup.py test
 after_success:
   - coveralls

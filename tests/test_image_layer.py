@@ -11,8 +11,8 @@ sys.path.insert(0, os.path.abspath('.'))
 
 from tests.helper import generate_valid_identifier, generate_tag
 
-from docktree.ImageLayer import ImageLayer
-from docktree.ImageLayer import _convert_size
+from dockgraph.ImageLayer import ImageLayer
+from dockgraph.ImageLayer import _convert_size
 
 
 class TestImageLayer(unittest.TestCase):

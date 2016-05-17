@@ -25,7 +25,7 @@ def get_requirements(filename="requirements.txt"):
     return requirements
 
 setup(
-    name='docktree',
+    name='dockgraph',
     version='0.1',
     # see https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
@@ -42,12 +42,12 @@ setup(
     ],
     description='analyse dependencies of docker images',
     long_description=read('README.rst'),
-    url='https://github.com/jneureuther/docktree',
+    url='https://github.com/jneureuther/dockgraph',
     author='Julian Neureuther',
     author_email='dev@jneureuther.de',
     license=read('LICENSE'),
-    packages=['docktree'],
-    scripts=['bin/docktree'],
+    packages=['dockgraph'],
+    scripts=['bin/dockgraph'],
     test_suite="tests",
     install_requires=get_requirements(),
 )

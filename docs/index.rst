@@ -1,5 +1,5 @@
-Welcome to docktree's documentation!
-====================================
+Welcome to dockgraph's documentation!
+=====================================
 
 Contents:
 
@@ -15,5 +15,5 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
-.. automodule:: docktree.docktree
+.. automodule:: dockgraph.dockgraph
    :members:
