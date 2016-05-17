@@ -3,33 +3,16 @@
 """Test the ImageLayer abstraction class"""
 
 import unittest
-import string
 import random
 import os
 import sys
 
 sys.path.insert(0, os.path.abspath('.'))
 
-from docktree.ImageLayer import ImageLayer
-from docktree.ImageLayer import _convert_size
+from tests.helper import generate_valid_identifier, generate_tag
 
-
-def generate_valid_identifier():
-    """:return a random but valid identifier for image layers"""
-    allowed_id_chars = list(set(string.hexdigits.lower()))
-    return ''.join(
-        (random.choice(allowed_id_chars) for _ in range(64))
-    )
-
-
-def generate_tag():
-    """:return a random but valid tag for image layers"""
-    allowed_tag_chars = string.ascii_letters + string.digits
-    return ''.join(
-        (random.choice(allowed_tag_chars) for _ in range(
-            random.randint(1, 100)
-        ))
-    )
+from dockgraph.ImageLayer import ImageLayer
+from dockgraph.ImageLayer import _convert_size
 
 
 class TestImageLayer(unittest.TestCase):
@@ -55,14 +38,14 @@ class TestImageLayer(unittest.TestCase):
         identifier = generate_valid_identifier()
         tags = [generate_tag() for _ in range(random.randint(0, 50))]
         layer = ImageLayer(identifier, tags=tags)
-        self.assertEqual(layer.tags, tags)
+        self.assertListEqual(layer.tags, tags)
         newtag = generate_tag()
         tags += newtag
         layer.tags.append(tags)
-        self.assertEqual(layer.tags, tags)
+        self.assertListEqual(layer.tags, tags)
         tags = [generate_tag() for _ in range(2)]
         layer.tags = tags
-        self.assertEqual(layer.tags, tags)
+        self.assertListEqual(layer.tags, tags)
 
     def test_size_prop(self):
         """test the tags property"""
@@ -234,14 +217,14 @@ class TestImageLayer(unittest.TestCase):
         dict_child = dict(layer_child)
         self.assertEqual(dict_parent['Id'], layer_parent.identifier)
         self.assertEqual(dict_parent['ParentId'], '')
-        self.assertEqual(dict_parent['RepoTags'], layer_parent.tags)
+        self.assertListEqual(dict_parent['RepoTags'], layer_parent.tags)
         self.assertEqual(dict_parent['VirtualSize'], layer_parent.size)
-        self.assertEqual(dict_parent['Children'], [dict(layer_child)])
+        self.assertListEqual(dict_parent['Children'], [dict(layer_child)])
         self.assertEqual(dict_child['Id'], layer_child.identifier)
         self.assertEqual(dict_child['ParentId'], layer_parent.identifier)
-        self.assertEqual(dict_child['RepoTags'], layer_child.tags)
+        self.assertListEqual(dict_child['RepoTags'], layer_child.tags)
         self.assertEqual(dict_child['VirtualSize'], layer_child.size)
-        self.assertEqual(dict_child['Children'], [])
+        self.assertListEqual(dict_child['Children'], [])
 
     def test_convert_size(self):
         """test the size to human conversation"""
@@ -256,31 +239,3 @@ class TestImageLayer(unittest.TestCase):
         self.assertEqual(_convert_size(1023*1024*1024*1024), '1023.0 GiB')
         self.assertEqual(_convert_size(1024*1024*1024*1024), '1.0 TiB')
         self.assertEqual(_convert_size(1023*1024*1024*1024*1024), '1023.0 TiB')
-
-    def test_print_tree(self):
-        """test the print_tree function"""
-        id_child = generate_valid_identifier()
-        size_child = 42*1024*1024*1024
-        layer_child = ImageLayer(
-            identifier=id_child,
-            tags=['child'],
-            size=size_child,
-        )
-        id_parent = generate_valid_identifier()
-        size_parent = 10*1024*1024
-        layer_parent = ImageLayer(
-            identifier=id_parent,
-            tags=['parent'],
-            size=size_parent,
-        )
-        ImageLayer.join_parent_child(parent=layer_parent, child=layer_child)
-        self.assertEqual(
-            layer_parent.print_tree(),
-            "- {id_head} Tags: ['parent'] Size: {size_head}\n"
-            "  |- {id_child} Tags: ['child'] Size: {size_child}\n".format(
-                id_head=id_parent[:12],
-                id_child=id_child[:12],
-                size_head=_convert_size(size_parent),
-                size_child=_convert_size(size_child),
-            )
-        )

@@ -1,61 +1,82 @@
-docktree
-========
+dockgraph
+=========
 
-.. image:: https://www.quantifiedcode.com/api/v1/project/32fe64b69f144531a2ed7c908aca46a8/badge.svg
-  :target: https://www.quantifiedcode.com/app/project/32fe64b69f144531a2ed7c908aca46a8
-  :alt: Code issues
+.. image:: https://www.quantifiedcode.com/api/v1/project/523dd250aef54e6bae0fc77050ee8414/badge.svg
+    :target: https://www.quantifiedcode.com/app/project/523dd250aef54e6bae0fc77050ee8414
+    :alt: Code issues
 
-.. image:: https://landscape.io/github/jneureuther/docktree/develop/landscape.svg?style=flat
-    :target: https://landscape.io/github/jneureuther/docktree/develop
+.. image:: https://landscape.io/github/jneureuther/dockgraph/develop/landscape.svg?style=flat
+    :target: https://landscape.io/github/jneureuther/dockgraph/develop
     :alt: Code Health
 
-.. image:: https://codecov.io/github/jneureuther/docktree/coverage.svg?branch=develop
-    :target: https://codecov.io/github/jneureuther/docktree?branch=develop
+.. image:: https://coveralls.io/repos/github/jneureuther/dockgraph/badge.svg?branch=develop
+    :target: https://coveralls.io/github/jneureuther/dockgraph?branch=develop
 
-.. image:: https://travis-ci.org/jneureuther/docktree.svg?branch=develop
-    :target: https://travis-ci.org/jneureuther/docktree
+.. image:: https://travis-ci.org/jneureuther/dockgraph.svg?branch=develop
+    :target: https://travis-ci.org/jneureuther/dockgraph
+
+.. image:: https://readthedocs.org/projects/dockgraph/badge/?version=latest
+    :target: http://dockgraph.readthedocs.org/en/latest/?badge=latest
+    :alt: Documentation Status
 
 Analyse dependencies of docker images.
 
 .. code::
 
-  - 65e4158d9625 Tags: ['docker.io/busybox:latest'] Size: 1.1 MiB
-     |- 8fa48410182e Tags: ['bar:latest'] Size: 1.1 MiB
-       |- 26cc8a5feb49 Tags: ['baz:latest'] Size: 1.1 MiB
-     |- 05710237af2f Tags: ['foo:latest'] Size: 1.1 MiB
+  ─── 307ac631f1b5 Tags: ['docker.io/busybox:latest'] Size: 1.1 MiB
+      ├── b6fd900f4d6a Tags: ['bar:latest'] Size: 1.1 MiB
+      │   └── 700decaa0660 Tags: ['baz:latest'] Size: 1.1 MiB
+      └── 5731cad94676 Tags: ['foo:latest'] Size: 1.1 MiB
+
+  1 heads, 4 layers
 
 Usage
 -----
+
+You can find the latest documentation on https://dockgraph.rtfd.org/.
 
 command-line
 ~~~~~~~~~~~~
 
 .. code:: bash
 
-  usage: docktree [-h] [-i] [-f {ascii,json}]
+  usage: dockgraph [-h] [-i] [-f {text,json}] [-e {ascii,utf-8}]
+                  [images [images ...]]
 
-  cli for docktree module
+  cli for dockgraph module
+
+  positional arguments:
+    images                image(s) to print, either specified by
+                          [repository]:[tag] or by the (abbreviated) image id
 
   optional arguments:
     -h, --help            show this help message and exit
     -i, --intermediate    print intermediate (untagged) layers
-    -f {ascii,json}, --format {ascii,json}
+    -f {text,json}, --format {text,json}
                           the output format
+    -e {ascii,utf-8}, --encoding {ascii,utf-8}
+                          the output encoding
 
 module
 ~~~~~~
 
 .. code:: python
 
-  import docktree
-  help(docktree.docktree)
+  import dockgraph
+  help(dockgraph.dockgraph)
 
 Contributing
 ------------
 
+You are very welcome to contribute to this project either by a pull request or
+by filing an issue/feature-request!
+
+Vagrant
+~~~~~~~
+
 | If you have Vagrant_ installed, just run ``vagrant up`` in order
 | to spin up a virtual machine containing everything needed for development.
-| Docktree will be installed system-wide and a set of example data is generated.
+| Dockgraph will be installed system-wide and a set of example data is generated.
 |
 | In order to automatically copy modified code into the vm run:
 
@@ -64,6 +85,21 @@ Contributing
   vagrant rsync-auto
 
 .. _Vagrant: https://www.vagrantup.com/
+
+Virtual Environment
+~~~~~~~~~~~~~~~~~~~
+
+If you have docker installed on your local machine you could also work in a
+`virtual environment`_:
+
+.. code:: bash
+
+  pip3 install virtualenv
+  virtualenv .env
+  source .env/bin/activate
+  ./setup.py develop
+
+.. _`virtual environment`: http://docs.python-guide.org/en/latest/dev/virtualenvs/
 
 unittests
 ~~~~~~~~~
@@ -78,9 +114,11 @@ Provide unittests_ whenever you can.
 
   ./setup.py test
   # or
-  coverage run tests/all_tests.py
+  coverage3 run setup.py test && coverage3 html
+  # in order to generate a code coverage report
 
 License
 -------
 
-Attribution-ShareAlike 4.0 International
+`Creative Commons Attribution-ShareAlike 4.0
+<LICENSE>`_

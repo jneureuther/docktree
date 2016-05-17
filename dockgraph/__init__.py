@@ -2,7 +2,7 @@
 Analyse dependencies of docker images.
 """
 
-__author__ = 'Julian Neureuther'
+__author__ = 'Julian Neureuther, Sebastian Endres'
 __email__ = 'dev@jneureuther.de'
 __url__ = 'https://github.com/jneureuther/{0}'.format(__name__)
 
