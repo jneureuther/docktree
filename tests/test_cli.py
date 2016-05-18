@@ -14,7 +14,7 @@ from tests.helper import generate_random_api_layer
 from tests.helper import generate_random_layer
 from tests.helper import connect_layers_random
 
-from bin import dockgraph_cli as cli
+from dockgraph import dockgraph_cli as cli
 from dockgraph.ImageLayer import ImageLayer
 from dockgraph.ImageLayer import _convert_size
 
