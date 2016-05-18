@@ -7,6 +7,7 @@ Setup script
 
 from setuptools import setup
 import os
+import codecs
 
 
 def read(fname):
@@ -42,7 +43,11 @@ setup(
         'Topic :: Utilities'
     ],
     description='analyse dependencies of docker images',
-    long_description=read('README.rst'),
+    long_description=codecs.open(
+            filename='README.rst',
+            mode='r',
+            encoding='utf-8'
+    ).read(),
     url='https://github.com/jneureuther/dockgraph',
     author='sedrubal <dev@sedrubal.de>, Julian Neureuther <dev@jneureuther.de>',
     license=read('LICENSE'),
