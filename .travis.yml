@@ -7,6 +7,7 @@ python:
   - "3.5-dev"
   - "nightly"
 install:
+  - pip install -U setuptools
   - ./setup.py install
   - pip install -q coveralls
 script:

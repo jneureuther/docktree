@@ -77,7 +77,7 @@ def _print_tree_wrap(layer, indentation, chars):
 def image_completer(prefix, **kwargs):
     """tab completion docker images"""
     if 'docker_images' not in kwargs.keys():
-        docker_cli = docker.Client()
+        docker_cli = docker.Client(version='auto')
         images = docker_cli.images()
     else:
         images = kwargs['docker_images']

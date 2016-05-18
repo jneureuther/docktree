@@ -1,3 +1,2 @@
-argparse
-argcomplete>=1.1.0
-docker-py==1.7.2
+argcomplete>=0.8.8,<=1.1.1
+docker-py>=1.7.2,<=1.8.1
