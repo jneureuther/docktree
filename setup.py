@@ -47,7 +47,11 @@ setup(
     author='sedrubal <dev@sedrubal.de>, Julian Neureuther <dev@jneureuther.de>',
     license=read('LICENSE'),
     packages=['dockgraph'],
-    scripts=['bin/dockgraph'],
+    entry_points={
+        'console_scripts': [
+            'dockgraph = dockgraph.dockgraph_cli:main'
+        ]
+    },
     test_suite="tests",
     install_requires=get_requirements(),
 )
