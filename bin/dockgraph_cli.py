@@ -12,6 +12,7 @@ import docker
 import sys
 import json
 import argparse
+import requests
 try:
     import argcomplete
 except ImportError:
@@ -78,7 +79,11 @@ def image_completer(prefix, **kwargs):
     """tab completion docker images"""
     if 'docker_images' not in kwargs.keys():
         docker_cli = docker.Client()
-        images = docker_cli.images()
+        try:
+            images = docker_cli.images()
+        except requests.exceptions.ConnectionError:
+            images = []
+            pass
     else:
         images = kwargs['docker_images']
     suggestions = set()
