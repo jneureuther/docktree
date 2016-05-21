@@ -83,7 +83,6 @@ def image_completer(prefix, **kwargs):
             images = docker_cli.images()
         except requests.exceptions.ConnectionError:
             images = []
-            pass
     else:
         images = kwargs['docker_images']
     suggestions = set()
