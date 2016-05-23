@@ -116,9 +116,3 @@ Provide unittests_ whenever you can.
   # or
   coverage3 run setup.py test && coverage3 html
   # in order to generate a code coverage report
-
-License
--------
-
-`Creative Commons Attribution-ShareAlike 4.0
-<LICENSE>`_
