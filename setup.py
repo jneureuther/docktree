@@ -62,7 +62,7 @@ setup(
     long_description=read('README.rst'),
     url='https://github.com/jneureuther/dockgraph',
     author='sedrubal <dev@sedrubal.de>, Julian Neureuther <dev@jneureuther.de>',
-    license=read('LICENSE'),
+    license='GPLv3',
     packages=['dockgraph'],
     scripts=['bin/dockgraph'],
     test_suite="tests",
