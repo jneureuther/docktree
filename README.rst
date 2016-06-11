@@ -40,10 +40,10 @@ command-line
 
 .. code:: bash
 
-  usage: dockgraph [-h] [-i] [-f {text,json}] [-e {ascii,utf-8}]
-                  [images [images ...]]
+  usage: dockgraph [-h] [-v] [-i] [-f {text,json}] [-e {ascii,utf-8}]
+                   [images [images ...]]
 
-  cli for dockgraph module
+  analyse dependencies of docker images
 
   positional arguments:
     images                image(s) to print, either specified by
@@ -51,6 +51,7 @@ command-line
 
   optional arguments:
     -h, --help            show this help message and exit
+    -v, --version         show program's version number and exit
     -i, --intermediate    print intermediate (untagged) layers
     -f {text,json}, --format {text,json}
                           the output format

@@ -103,7 +103,10 @@ def parse_args(argv=sys.argv[1:]):
     :rtype: object
     """
 
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description=dockgraph.__doc__,
+        version=dockgraph.__version__,
+    )
 
     parser.add_argument(
         '-i',
