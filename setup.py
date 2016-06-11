@@ -9,6 +9,11 @@ from setuptools import setup
 import os
 import codecs
 
+__author__ = 'Julian Neureuther <dev@jneureuther.de>, \
+              sedrubal <dev@sedrubal.de>'
+__copyright__ = 'Copyright (C) 2016 The authors of dockgraph'
+__license__ = 'GPLv3'
+
 
 def read(fname):
     """returns the text of a file"""
@@ -49,8 +54,8 @@ setup(
             encoding='utf-8'
     ).read(),
     url='https://github.com/jneureuther/dockgraph',
-    author='sedrubal <dev@sedrubal.de>, Julian Neureuther <dev@jneureuther.de>',
-    license=read('LICENSE'),
+    author=__author__,
+    license=__license__,
     packages=['dockgraph'],
     scripts=['bin/dockgraph'],
     test_suite="tests",

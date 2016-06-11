@@ -15,6 +15,11 @@ import docker
 import requests
 import dockgraph
 
+__author__ = 'Julian Neureuther <dev@jneureuther.de>, \
+              sedrubal <dev@sedrubal.de>'
+__copyright__ = 'Copyright (C) 2016 The authors of dockgraph'
+__license__ = 'GPLv3'
+
 
 def print_tree(heads, output_format='text', encoding='ascii'):
     """

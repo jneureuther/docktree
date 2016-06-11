@@ -14,6 +14,11 @@ from tests.helper import generate_valid_identifier, generate_tag
 from dockgraph.ImageLayer import ImageLayer
 from dockgraph.ImageLayer import _convert_size
 
+__author__ = 'Julian Neureuther <dev@jneureuther.de>, \
+              sedrubal <dev@sedrubal.de>'
+__copyright__ = 'Copyright (C) 2016 The authors of dockgraph'
+__license__ = 'GPLv3'
+
 
 class TestImageLayer(unittest.TestCase):
     """Test the ImageLayer abstraction class"""

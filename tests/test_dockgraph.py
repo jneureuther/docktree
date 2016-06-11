@@ -17,6 +17,11 @@ from tests.helper import connect_layers_random
 from dockgraph import dockgraph
 from dockgraph.ImageLayer import ImageLayer
 
+__author__ = 'Julian Neureuther <dev@jneureuther.de>, \
+              sedrubal <dev@sedrubal.de>'
+__copyright__ = 'Copyright (C) 2016 The authors of dockgraph'
+__license__ = 'GPLv3'
+
 
 class Testdockgraph(unittest.TestCase):
     """Test the dockgraph.dockgraph module"""
