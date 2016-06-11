@@ -1,22 +1,5 @@
 #!/usr/bin/env python
 
-# dockgraph: Analyse dependencies of docker images.
-# Copyright (C) 2016 Julian Neureuther <dev@jneureuther.de>
-#                    sedrubal <dev@sedrubal.de>
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 """
 Run all unittests
 """
@@ -24,6 +7,11 @@ Run all unittests
 import sys
 import os
 import unittest
+
+__author__ = 'Julian Neureuther <dev@jneureuther.de>, \
+              sedrubal <dev@sedrubal.de>'
+__copyright__ = 'Copyright (C) 2016 The authors of dockgraph'
+__license__ = 'GPLv3'
 
 
 TESTDIR = os.path.dirname(__file__)
