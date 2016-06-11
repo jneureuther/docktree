@@ -7,13 +7,13 @@ cli for dockgraph module
 """
 
 from __future__ import print_function
-import dockgraph
-import docker
 import sys
 import json
 import argparse
 import argcomplete
+import docker
 import requests
+import dockgraph
 
 
 def print_tree(heads, output_format='text', encoding='ascii'):

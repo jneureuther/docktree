@@ -5,12 +5,14 @@ Analyse dependencies of docker images.
 """
 
 from __future__ import absolute_import
-from .ImageLayer import ImageLayer
+from __future__ import print_function
 
-import docker
-import copy
 import sys
+import copy
+import docker
 import requests
+
+from .ImageLayer import ImageLayer
 
 
 def _fetch_all_layers():
@@ -19,8 +21,10 @@ def _fetch_all_layers():
     try:
         return docker_cli.images(all=True)
     except requests.exceptions.ConnectionError:
-        print('Could not connect to docker daemon, is it running?')
+        print('Could not connect to docker daemon, is it running?',
+              file=sys.stderr)
         sys.exit(1)
+
 
 def analyze_layers(images=None):
     """
