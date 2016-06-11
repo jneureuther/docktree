@@ -57,6 +57,18 @@ command-line
     -e {ascii,utf-8}, --encoding {ascii,utf-8}
                           the output encoding
 
+argcompletion
+`````````````
+
+This tool comes with tab completion.
+If it doesn't work, you have to enable it by installing `python-argcomplete` and run
+
+.. code:: shell
+
+  activate-global-python-argcomplete
+
+More info is available here: https://pypi.python.org/pypi/argcomplete
+
 module
 ~~~~~~
 
@@ -120,5 +132,20 @@ Provide unittests_ whenever you can.
 License
 -------
 
-`Creative Commons Attribution-ShareAlike 4.0
-<LICENSE>`_
+.. code::
+
+  Copyright (C) 2016 Julian Neureuther <dev@jneureuther.de>
+                     sedrubal <dev@sedrubal.de>
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.

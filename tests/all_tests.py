@@ -8,6 +8,11 @@ import sys
 import os
 import unittest
 
+__author__ = 'Julian Neureuther <dev@jneureuther.de>, \
+              sedrubal <dev@sedrubal.de>'
+__copyright__ = 'Copyright (C) 2016 The authors of dockgraph'
+__license__ = 'GPLv3'
+
 
 TESTDIR = os.path.dirname(__file__)
 

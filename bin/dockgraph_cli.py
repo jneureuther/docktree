@@ -7,15 +7,18 @@ cli for dockgraph module
 """
 
 from __future__ import print_function
-import dockgraph
-import docker
 import sys
 import json
 import argparse
-try:
-    import argcomplete
-except ImportError:
-    pass
+import argcomplete
+import docker
+import requests
+import dockgraph
+
+__author__ = 'Julian Neureuther <dev@jneureuther.de>, \
+              sedrubal <dev@sedrubal.de>'
+__copyright__ = 'Copyright (C) 2016 The authors of dockgraph'
+__license__ = 'GPLv3'
 
 
 def print_tree(heads, output_format='text', encoding='ascii'):
@@ -78,7 +81,10 @@ def image_completer(prefix, **kwargs):
     """tab completion docker images"""
     if 'docker_images' not in kwargs.keys():
         docker_cli = docker.Client()
-        images = docker_cli.images()
+        try:
+            images = docker_cli.images()
+        except requests.exceptions.ConnectionError:
+            images = []
     else:
         images = kwargs['docker_images']
     suggestions = set()
@@ -132,8 +138,7 @@ def parse_args(argv=sys.argv[1:]):
              'or by the (abbreviated) image id'
     ).completer = image_completer
 
-    if 'argcomplete' in globals().keys():
-        argcomplete.autocomplete(parser)
+    argcomplete.autocomplete(parser)
 
     return parser.parse_args(argv)
 

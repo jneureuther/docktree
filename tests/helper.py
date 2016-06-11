@@ -7,6 +7,11 @@ import string
 
 from dockgraph.ImageLayer import ImageLayer
 
+__author__ = 'Julian Neureuther <dev@jneureuther.de>, \
+              sedrubal <dev@sedrubal.de>'
+__copyright__ = 'Copyright (C) 2016 The authors of dockgraph'
+__license__ = 'GPLv3'
+
 
 def generate_valid_identifier():
     """:return a random but valid identifier for image layers"""
