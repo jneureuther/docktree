@@ -12,10 +12,7 @@ import docker
 import sys
 import json
 import argparse
-try:
-    import argcomplete
-except ImportError:
-    pass
+import argcomplete
 
 
 def print_tree(heads, output_format='text', encoding='ascii'):
@@ -132,8 +129,7 @@ def parse_args(argv=sys.argv[1:]):
              'or by the (abbreviated) image id'
     ).completer = image_completer
 
-    if 'argcomplete' in globals().keys():
-        argcomplete.autocomplete(parser)
+    argcomplete.autocomplete(parser)
 
     return parser.parse_args(argv)
 
