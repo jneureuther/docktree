@@ -13,6 +13,7 @@ import sys
 import json
 import argparse
 import argcomplete
+import requests
 
 
 def print_tree(heads, output_format='text', encoding='ascii'):
@@ -75,7 +76,10 @@ def image_completer(prefix, **kwargs):
     """tab completion docker images"""
     if 'docker_images' not in kwargs.keys():
         docker_cli = docker.Client()
-        images = docker_cli.images()
+        try:
+            images = docker_cli.images()
+        except requests.exceptions.ConnectionError:
+            images = []
     else:
         images = kwargs['docker_images']
     suggestions = set()

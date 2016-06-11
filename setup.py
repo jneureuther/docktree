@@ -7,6 +7,7 @@ Setup script
 
 from setuptools import setup
 import os
+import codecs
 
 
 def read(fname):
@@ -26,25 +27,29 @@ def get_requirements(filename="requirements.txt"):
 
 setup(
     name='dockgraph',
-    version='0.1',
+    version='1.0.0',
     # see https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
-        'Development Status :: 1 - Planning',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
         'License :: Other/Proprietary License',
         'Natural Language :: English',
         'Operating System :: OS Independent',
+        'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Topic :: Utilities'
     ],
     description='analyse dependencies of docker images',
-    long_description=read('README.rst'),
+    long_description=codecs.open(
+            filename='README.rst',
+            mode='r',
+            encoding='utf-8'
+    ).read(),
     url='https://github.com/jneureuther/dockgraph',
-    author='Julian Neureuther',
-    author_email='dev@jneureuther.de',
+    author='sedrubal <dev@sedrubal.de>, Julian Neureuther <dev@jneureuther.de>',
     license=read('LICENSE'),
     packages=['dockgraph'],
     scripts=['bin/dockgraph'],

@@ -57,6 +57,18 @@ command-line
     -e {ascii,utf-8}, --encoding {ascii,utf-8}
                           the output encoding
 
+argcompletion
+`````````````
+
+This tool comes with tab completion.
+If it doesn't work, you have to enable it by installing `python-argcomplete` and run
+
+.. code:: shell
+
+  activate-global-python-argcomplete
+
+More info is available here: https://pypi.python.org/pypi/argcomplete
+
 module
 ~~~~~~
 
