@@ -40,10 +40,10 @@ command-line
 
 .. code:: bash
 
-  usage: dockgraph [-h] [-i] [-f {text,json}] [-e {ascii,utf-8}]
-                  [images [images ...]]
+  usage: dockgraph [-h] [-i] [-f {text,json}] [-e {ascii,utf-8}] [-v]
+                   [images [images ...]]
 
-  cli for dockgraph module
+  analyse dependencies of docker images
 
   positional arguments:
     images                image(s) to print, either specified by
@@ -56,6 +56,7 @@ command-line
                           the output format
     -e {ascii,utf-8}, --encoding {ascii,utf-8}
                           the output encoding
+    -v, --version         show program's version number and exit
 
 argcompletion
 `````````````
