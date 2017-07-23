@@ -105,7 +105,6 @@ def parse_args(argv=sys.argv[1:]):
 
     parser = argparse.ArgumentParser(
         description=dockgraph.__doc__,
-        version=dockgraph.__version__,
     )
 
     parser.add_argument(
@@ -131,6 +130,12 @@ def parse_args(argv=sys.argv[1:]):
         choices=('ascii', 'utf-8'),
         default=sys.stdout.encoding,
         help='the output encoding'
+    )
+    parser.add_argument(
+        '-v',
+        '--version',
+        action='version',
+        version='%(prog)s {version}'.format(version=dockgraph.__version__)
     )
 
     parser.add_argument(

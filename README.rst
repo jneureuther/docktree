@@ -40,7 +40,7 @@ command-line
 
 .. code:: bash
 
-  usage: dockgraph [-h] [-v] [-i] [-f {text,json}] [-e {ascii,utf-8}]
+  usage: dockgraph [-h] [-i] [-f {text,json}] [-e {ascii,utf-8}] [-v]
                    [images [images ...]]
 
   analyse dependencies of docker images
@@ -51,12 +51,12 @@ command-line
 
   optional arguments:
     -h, --help            show this help message and exit
-    -v, --version         show program's version number and exit
     -i, --intermediate    print intermediate (untagged) layers
     -f {text,json}, --format {text,json}
                           the output format
     -e {ascii,utf-8}, --encoding {ascii,utf-8}
                           the output encoding
+    -v, --version         show program's version number and exit
 
 argcompletion
 `````````````
